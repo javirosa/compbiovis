@@ -91,6 +91,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
     
     private Visualization m_vis;
     
+    private JCheckBox alignedEdges;
+    
     public ModuleViewer(Graph g, String label) {
     	super(new BorderLayout());
     	
@@ -256,8 +258,10 @@ public class ModuleViewer extends JPanel implements ActionListener {
         /*
          * create a check box for aligned edges
          */
-        JCheckBox alignedEdges = new JCheckBox("Show aligned edges");
+        alignedEdges = new JCheckBox("Show aligned edges");
         alignedEdges.setSelected(true);
+        alignedEdges.setActionCommand("aligned");
+        alignedEdges.addActionListener(this);
         
         JPanel checkPanel = new JPanel(new GridLayout(1,0));
         checkPanel.add(alignedEdges);
@@ -327,6 +331,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			ColumnExpression ce = new ColumnExpression("group");
 			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_0, String.class));
 			setVisible(ts,cp,true);
+			
+			alignedEdges.setEnabled(false);
 		}
 		else if(e.getActionCommand() == "m1") {
 			setAllVisible(false);
@@ -334,9 +340,27 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			ColumnExpression ce = new ColumnExpression("group");
 			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_1, String.class));
 			setVisible(ts,cp,true);
+			
+			alignedEdges.setEnabled(false);
 		}
 		else if(e.getActionCommand() == "both") {
+			alignedEdges.setEnabled(true);
+			alignedEdges.setSelected(true);
 			setAllVisible(true);
+		}
+		else if(e.getActionCommand() == "aligned") {
+			ColumnExpression ce = new ColumnExpression("group");
+			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.ALIGNED_EDGES, String.class));
+			
+			JCheckBox jcb = (JCheckBox)e.getSource();
+			if(jcb.isSelected()) {
+				System.out.println("selected");
+				setVisible(m_vis.getVisualGroup(edges),cp,true);
+			}
+			else {
+				System.out.println("deselected");
+				setVisible(m_vis.getVisualGroup(edges),cp,false);
+			}
 		}
 	}
     
@@ -349,7 +373,9 @@ public class ModuleViewer extends JPanel implements ActionListener {
 	}
 	
 	private void setVisible(TupleSet ts, Predicate p, boolean visible) {
-		Iterator newTuples = ts.tuples(p);
+		Iterator newTuples;
+		if(p != null) newTuples = ts.tuples(p);
+		else newTuples = ts.tuples();
 		while(newTuples.hasNext()) {
 			VisualItem vi = (VisualItem)newTuples.next();
 			vi.setVisible(visible);
