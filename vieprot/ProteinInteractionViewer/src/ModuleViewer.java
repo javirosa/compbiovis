@@ -18,6 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -252,9 +253,22 @@ public class ModuleViewer extends JPanel implements ActionListener {
         bgbox.setBorder(BorderFactory.createTitledBorder("Module visibility filter"));
         fpanel.add(bgbox);
         
+        /*
+         * create a check box for aligned edges
+         */
+        JCheckBox alignedEdges = new JCheckBox("Show aligned edges");
+        alignedEdges.setSelected(true);
         
+        JPanel checkPanel = new JPanel(new GridLayout(1,0));
+        checkPanel.add(alignedEdges);
+        checkPanel.setBackground(Color.WHITE);
+        checkPanel.setPreferredSize(new Dimension(300,30));
+        checkPanel.setMaximumSize(new Dimension(300,30));
         
-        //fpanel.add(Box.createVerticalGlue());
+        Box aebox = new Box(BoxLayout.Y_AXIS);
+        aebox.add(checkPanel);
+        aebox.setBorder(BorderFactory.createTitledBorder("Show aligned edges"));
+        fpanel.add(aebox);
         
         // Create the JList with all the conserved modules
         DefaultListModel graphIDs= new DefaultListModel();
@@ -290,7 +304,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         m_vis.removeGroup(graph);
         VisualGraph vg = m_vis.addGraph(graph, g);
         
-        m_vis.addFocusGroup(currentlyVisible);
+        //m_vis.addFocusGroup(currentlyVisible);
         
         m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
         VisualItem f = (VisualItem)vg.getNode(0);
@@ -312,45 +326,14 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			
 			ColumnExpression ce = new ColumnExpression("group");
 			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_0, String.class));
-			//m_vis.getVisualGroup(graph).clear();
-			//Predicate p = (Predicate) ExpressionParser.parse("["+"group"+"] == "+VieprotLib.Constants.MODULE_0);
-
-			Iterator newTuples = ts.tuples(cp);
-			m_vis.getGroup(currentlyVisible).clear();
-			int count = 0;
-			while(newTuples.hasNext()) {
-				VisualItem vi = (VisualItem)newTuples.next();
-				vi.setVisible(true);
-				m_vis.getGroup(currentlyVisible).addTuple(vi);
-				count++;
-			}
-			
-			//Tuple t = (Tuple)newTuples.next();
-			//System.out.println(t.toString());
-	        //m_vis.getGroup(Visualization.FOCUS_ITEMS).setTuple(f);
-	        //f.setFixed(false);
-			
-			//m_vis.run("draw");
+			setVisible(ts,cp,true);
 		}
 		else if(e.getActionCommand() == "m1") {
 			setAllVisible(false);
 						
 			ColumnExpression ce = new ColumnExpression("group");
 			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_1, String.class));
-			Iterator newTuples = ts.tuples(cp);
-			m_vis.getGroup(currentlyVisible).clear();
-			int count = 0;
-			while(newTuples.hasNext()) {
-				VisualItem vi = (VisualItem)newTuples.next();
-				vi.setVisible(true);
-				m_vis.getGroup(currentlyVisible).addTuple(vi);
-				count++;
-			}
-			System.out.format("%d\n", count);
-			//Tuple t = (Tuple)newTuples.next();
-			//System.out.println(t.toString());
-	        //m_vis.getGroup(Visualization.FOCUS_ITEMS).setTuple(f);
-	        //f.setFixed(false);
+			setVisible(ts,cp,true);
 		}
 		else if(e.getActionCommand() == "both") {
 			setAllVisible(true);
@@ -361,6 +344,14 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		Iterator visibleItems = m_vis.getGroup(graph).tuples();
 		while(visibleItems.hasNext()) {
 			VisualItem vi = (VisualItem)(visibleItems.next());
+			vi.setVisible(visible);
+		}
+	}
+	
+	private void setVisible(TupleSet ts, Predicate p, boolean visible) {
+		Iterator newTuples = ts.tuples(p);
+		while(newTuples.hasNext()) {
+			VisualItem vi = (VisualItem)newTuples.next();
 			vi.setVisible(visible);
 		}
 	}

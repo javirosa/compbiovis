@@ -273,11 +273,15 @@ public class GraphCollectionMLReader extends AbstractGraphReader  implements Gra
                 String value = m_sbuf.toString();
                 String name = (String)m_idMap.get(m_key);
                 Class type = m_table.getColumnType(name);
+                if(value != null) {
                 try {
                     Object val = parse(value, type);
                     m_table.set(m_row, name, val);
                 } catch ( DataParseException dpe ) {
                     error(dpe);
+                } catch ( NullPointerException npe) {
+                	error(npe);
+                }
                 }
             }
             else if ( qName.equals(NODE) || qName.equals(EDGE) ) {
@@ -328,11 +332,10 @@ public class GraphCollectionMLReader extends AbstractGraphReader  implements Gra
         
         protected void resetCurrentGraph() {
             m_nodeMap.clear();
-            m_idMap.clear();
             inSchema = true;
             
-            m_esch = new Schema();
-            m_nsch = new Schema();
+            //m_esch = new Schema();
+            //m_nsch = new Schema();
             
             //m_nodes = null;
             //m_edges = null;
@@ -350,6 +353,7 @@ public class GraphCollectionMLReader extends AbstractGraphReader  implements Gra
             m_row = -1;
             m_table = null;
             
+            /*
             m_esch.addColumn(ID, String.class);
             m_esch.addColumn(SRC, int.class);
             m_esch.addColumn(TRG, int.class);
@@ -359,6 +363,7 @@ public class GraphCollectionMLReader extends AbstractGraphReader  implements Gra
             
             m_nsch.addColumn(ID, String.class);
             m_nsch.addColumn(GROUP, String.class);
+            */
             
             m_directed = false;
         }
