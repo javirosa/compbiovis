@@ -135,7 +135,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         int hops = 30;
         final GraphDistanceFilter filter = new GraphDistanceFilter(graph, nodes, hops);
 
-        ColorAction fill = new ColorAction(currentlyVisible, 
+        ColorAction fill = new ColorAction(nodes, 
                 VisualItem.FILLCOLOR, ColorLib.rgb(200,200,255));
         fill.add(VisualItem.FIXED, ColorLib.rgb(255,100,100));
         fill.add(VisualItem.HIGHLIGHT, ColorLib.rgb(255,200,125));
@@ -143,12 +143,11 @@ public class ModuleViewer extends JPanel implements ActionListener {
         ActionList draw = new ActionList();
         draw.add(filter);
         draw.add(fill);
-        //draw.add(new ColorAction(nodes, VisualItem.STROKECOLOR, 0));
-        draw.add(new ColorAction(currentlyVisible, VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
-        //draw.add(new ColorAction(edges, VisualItem.FILLCOLOR, ColorLib.gray(200)));
-        //draw.add(new ColorAction(edges, VisualItem.STROKECOLOR, ColorLib.gray(200)));
-        //draw.add(new SizeAction(nodes));
-        draw.add(new SizeAction(currentlyVisible));
+        draw.add(new ColorAction(nodes, VisualItem.STROKECOLOR, 0));
+        draw.add(new ColorAction(nodes, VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
+        draw.add(new ColorAction(edges, VisualItem.FILLCOLOR, ColorLib.gray(200)));
+        draw.add(new ColorAction(edges, VisualItem.STROKECOLOR, ColorLib.gray(200)));
+        draw.add(new SizeAction(nodes));
         
         ActionList animate = new ActionList(Activity.INFINITY);
         animate.add(new ForceDirectedLayout(graph, true));
@@ -305,24 +304,24 @@ public class ModuleViewer extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		//m_vis.getGroup(Visualization.FOCUS_ITEMS).clear();
-		TupleSet ts = m_vis.getVisualGroup("graph.nodes");
+		//TupleSet ts = m_vis.getVisualGroup("graph.nodes");
+		TupleSet ts = m_vis.getVisualGroup(graph);
 		// TODO Auto-generated method stub
 		if(e.getActionCommand() == "m0") {
+			setAllVisible(false);
+			
 			ColumnExpression ce = new ColumnExpression("group");
 			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_0, String.class));
 			//m_vis.getVisualGroup(graph).clear();
 			//Predicate p = (Predicate) ExpressionParser.parse("["+"group"+"] == "+VieprotLib.Constants.MODULE_0);
-			Iterator visibleItems = m_vis.visibleItems();
-			while(visibleItems.hasNext()) {
-				VisualItem vi = (VisualItem)(visibleItems.next());
-				vi.setVisible(false);
-			}
-			
+
 			Iterator newTuples = ts.tuples(cp);
 			m_vis.getGroup(currentlyVisible).clear();
 			int count = 0;
 			while(newTuples.hasNext()) {
-				m_vis.getGroup(currentlyVisible).addTuple((Tuple)newTuples.next());
+				VisualItem vi = (VisualItem)newTuples.next();
+				vi.setVisible(true);
+				m_vis.getGroup(currentlyVisible).addTuple(vi);
 				count++;
 			}
 			
@@ -334,16 +333,17 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			//m_vis.run("draw");
 		}
 		else if(e.getActionCommand() == "m1") {
+			setAllVisible(false);
+						
 			ColumnExpression ce = new ColumnExpression("group");
 			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_1, String.class));
-			//m_vis.getVisualGroup(graph).clear();
-			//Predicate p = (Predicate) ExpressionParser.parse("["+"group"+"] == "+VieprotLib.Constants.MODULE_0);
 			Iterator newTuples = ts.tuples(cp);
-			
 			m_vis.getGroup(currentlyVisible).clear();
 			int count = 0;
 			while(newTuples.hasNext()) {
-				m_vis.getGroup(currentlyVisible).addTuple((Tuple)newTuples.next());
+				VisualItem vi = (VisualItem)newTuples.next();
+				vi.setVisible(true);
+				m_vis.getGroup(currentlyVisible).addTuple(vi);
 				count++;
 			}
 			System.out.format("%d\n", count);
@@ -353,10 +353,18 @@ public class ModuleViewer extends JPanel implements ActionListener {
 	        //f.setFixed(false);
 		}
 		else if(e.getActionCommand() == "both") {
-			
+			setAllVisible(true);
 		}
 	}
     
+	private void setAllVisible(boolean visible) {
+		Iterator visibleItems = m_vis.getGroup(graph).tuples();
+		while(visibleItems.hasNext()) {
+			VisualItem vi = (VisualItem)(visibleItems.next());
+			vi.setVisible(visible);
+		}
+	}
+	
     // ------------------------------------------------------------------------
     // Main and demo methods
     

@@ -162,6 +162,7 @@ public class GraphCollectionMLReader extends AbstractGraphReader  implements Gra
             m_esch.addColumn(TRG, int.class);
             m_esch.addColumn(SRCID, String.class);
             m_esch.addColumn(TRGID, String.class);
+            m_esch.addColumn(GROUP, String.class);
             
             m_nsch.addColumn(ID, String.class);
             m_nsch.addColumn(GROUP, String.class);
@@ -238,7 +239,9 @@ public class GraphCollectionMLReader extends AbstractGraphReader  implements Gra
                 
                 // Insert ID into the table
                 String id = atts.getValue(ID);
+                String group = atts.getValue(GROUP);
                 m_table.set(m_row, ID, id);
+                m_table.set(m_row, GROUP, group);
             }
             else if ( qName.equals(DATA) )
             {
@@ -352,6 +355,7 @@ public class GraphCollectionMLReader extends AbstractGraphReader  implements Gra
             m_esch.addColumn(TRG, int.class);
             m_esch.addColumn(SRCID, String.class);
             m_esch.addColumn(TRGID, String.class);
+            m_esch.addColumn(GROUP, String.class);
             
             m_nsch.addColumn(ID, String.class);
             m_nsch.addColumn(GROUP, String.class);
