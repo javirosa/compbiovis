@@ -150,15 +150,24 @@ public class ModuleViewer extends JPanel implements ActionListener {
         draw.add(fill);
         draw.add(new ColorAction(nodes, VisualItem.STROKECOLOR, 0));
         draw.add(new ColorAction(nodes, VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
-        draw.add(new ColorAction(edges, VisualItem.FILLCOLOR, ColorLib.gray(200)));
-        draw.add(new ColorAction(edges, VisualItem.STROKECOLOR, ColorLib.gray(200)));
+        draw.add(new ColorAction(VieprotLib.Constants.INTERNAL_EDGES, VisualItem.FILLCOLOR, ColorLib.gray(200)));
+        draw.add(new ColorAction(VieprotLib.Constants.INTERNAL_EDGES, VisualItem.STROKECOLOR, ColorLib.gray(200)));
+        draw.add(new ColorAction(VieprotLib.Constants.ALIGNED_EDGES, VisualItem.FILLCOLOR, ColorLib.rgba(200,0,0,30)));
+        draw.add(new ColorAction(VieprotLib.Constants.ALIGNED_EDGES, VisualItem.STROKECOLOR, ColorLib.rgba(200,0,0,30)));
         draw.add(new SizeAction(nodes));
         
         ActionList animate = new ActionList(Activity.INFINITY);
         
+        ForceDirectedLayout internalEdgeLayout = new ForceDirectedLayout(graph, true);
+        internalEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.INTERNAL_EDGES);
+        animate.add(internalEdgeLayout);
+
+        // For later: add lighter forces to the aligned edges.
         ForceDirectedLayout alignedEdgeLayout = new ForceDirectedLayout(graph, true);
-        alignedEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.INTERNAL_EDGES);
-        animate.add(alignedEdgeLayout);
+        alignedEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.ALIGNED_EDGES);
+        ForceSimulator alignedEdgeForces = alignedEdgeLayout.getForceSimulator();
+        
+        
         //animate.add(new ForceDirectedLayout(graph, true));
         animate.add(fill);
         animate.add(new RepaintAction());
@@ -170,7 +179,6 @@ public class ModuleViewer extends JPanel implements ActionListener {
         m_vis.putAction("layout", animate);
 
         m_vis.runAfter("draw", "layout");
-        
         
         // --------------------------------------------------------------------
         // set up a display to show the visualization
@@ -317,6 +325,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
         /*
          * Initalize the groups
          */
+        
+        // Aligned edge group
         m_vis.removeGroup(VieprotLib.Constants.ALIGNED_EDGES);
         m_vis.addFocusGroup(VieprotLib.Constants.ALIGNED_EDGES);
         TupleSet ts = m_vis.getFocusGroup(VieprotLib.Constants.ALIGNED_EDGES);
@@ -325,6 +335,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			ts.addTuple((Tuple)alignedEdgeTuples.next());
 		}
 		
+		// Internal edge group
 		m_vis.removeGroup(VieprotLib.Constants.INTERNAL_EDGES);
 		m_vis.addFocusGroup(VieprotLib.Constants.INTERNAL_EDGES);
 		TupleSet internalEdges = m_vis.getFocusGroup(VieprotLib.Constants.INTERNAL_EDGES);
@@ -332,9 +343,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		while(internalEdgeTuples.hasNext()) {
 			internalEdges.addTuple((Tuple)internalEdgeTuples.next());
 		}
-		
-        //m_vis.addFocusGroup(currentlyVisible);
-        
+
         m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
         VisualItem f = (VisualItem)vg.getNode(0);
         m_vis.getGroup(Visualization.FOCUS_ITEMS).setTuple(f);
