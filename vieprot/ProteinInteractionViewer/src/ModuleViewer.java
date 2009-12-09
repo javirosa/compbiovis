@@ -56,9 +56,11 @@ import prefuse.data.Graph;
 import prefuse.data.Table;
 import prefuse.data.Tuple;
 import prefuse.data.event.TupleSetListener;
+import prefuse.data.expression.AndPredicate;
 import prefuse.data.expression.ColumnExpression;
 import prefuse.data.expression.ComparisonPredicate;
 import prefuse.data.expression.Literal;
+import prefuse.data.expression.OrPredicate;
 import prefuse.data.expression.Predicate;
 import prefuse.data.expression.parser.ExpressionParser;
 import prefuse.data.io.GraphCollection;
@@ -155,9 +157,9 @@ public class ModuleViewer extends JPanel implements ActionListener {
         ActionList animate = new ActionList(Activity.INFINITY);
         
         ForceDirectedLayout alignedEdgeLayout = new ForceDirectedLayout(graph, true);
-        alignedEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.ALIGNED_EDGES);
-        //animate.add(new ForceDirectedLayout(graph, true));
+        alignedEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.INTERNAL_EDGES);
         animate.add(alignedEdgeLayout);
+        //animate.add(new ForceDirectedLayout(graph, true));
         animate.add(fill);
         animate.add(new RepaintAction());
         
@@ -323,6 +325,14 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			ts.addTuple((Tuple)alignedEdgeTuples.next());
 		}
 		
+		m_vis.removeGroup(VieprotLib.Constants.INTERNAL_EDGES);
+		m_vis.addFocusGroup(VieprotLib.Constants.INTERNAL_EDGES);
+		TupleSet internalEdges = m_vis.getFocusGroup(VieprotLib.Constants.INTERNAL_EDGES);
+		Iterator internalEdgeTuples = getInternalEdges();
+		while(internalEdgeTuples.hasNext()) {
+			internalEdges.addTuple((Tuple)internalEdgeTuples.next());
+		}
+		
         //m_vis.addFocusGroup(currentlyVisible);
         
         m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
@@ -378,6 +388,15 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		ColumnExpression ce = new ColumnExpression("group");
 		ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(s, String.class));
 		return cp;
+	}
+	
+	private Iterator getAlignedEdges() {
+		return (Iterator)m_vis.getGroup(graph).tuples(getVieprotGroup(VieprotLib.Constants.ALIGNED_EDGES));
+	}
+	
+	private Iterator getInternalEdges() {
+		OrPredicate ap = new OrPredicate(getVieprotGroup(VieprotLib.Constants.MODULE_0), getVieprotGroup(VieprotLib.Constants.MODULE_1));
+		return (Iterator)m_vis.getGroup(edges).tuples(ap);
 	}
 	
 	private void setAllVisible(boolean visible) {
