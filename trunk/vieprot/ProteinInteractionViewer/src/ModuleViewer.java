@@ -153,7 +153,11 @@ public class ModuleViewer extends JPanel implements ActionListener {
         draw.add(new SizeAction(nodes));
         
         ActionList animate = new ActionList(Activity.INFINITY);
-        animate.add(new ForceDirectedLayout(graph, true));
+        
+        ForceDirectedLayout alignedEdgeLayout = new ForceDirectedLayout(graph, true);
+        alignedEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.ALIGNED_EDGES);
+        //animate.add(new ForceDirectedLayout(graph, true));
+        animate.add(alignedEdgeLayout);
         animate.add(fill);
         animate.add(new RepaintAction());
         
@@ -308,6 +312,17 @@ public class ModuleViewer extends JPanel implements ActionListener {
         m_vis.removeGroup(graph);
         VisualGraph vg = m_vis.addGraph(graph, g);
         
+        /*
+         * Initalize the groups
+         */
+        m_vis.removeGroup(VieprotLib.Constants.ALIGNED_EDGES);
+        m_vis.addFocusGroup(VieprotLib.Constants.ALIGNED_EDGES);
+        TupleSet ts = m_vis.getFocusGroup(VieprotLib.Constants.ALIGNED_EDGES);
+		Iterator alignedEdgeTuples = m_vis.items(getVieprotGroup(VieprotLib.Constants.ALIGNED_EDGES));
+		while(alignedEdgeTuples.hasNext()) {
+			ts.addTuple((Tuple)alignedEdgeTuples.next());
+		}
+		
         //m_vis.addFocusGroup(currentlyVisible);
         
         m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
@@ -327,18 +342,14 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand() == "m0") {
 			setAllVisible(false);
-			
-			ColumnExpression ce = new ColumnExpression("group");
-			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_0, String.class));
+			Predicate cp = getVieprotGroup(VieprotLib.Constants.MODULE_0);
 			setVisible(ts,cp,true);
 			
 			alignedEdges.setEnabled(false);
 		}
 		else if(e.getActionCommand() == "m1") {
 			setAllVisible(false);
-						
-			ColumnExpression ce = new ColumnExpression("group");
-			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.MODULE_1, String.class));
+			Predicate cp = getVieprotGroup(VieprotLib.Constants.MODULE_1);
 			setVisible(ts,cp,true);
 			
 			alignedEdges.setEnabled(false);
@@ -349,8 +360,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			setAllVisible(true);
 		}
 		else if(e.getActionCommand() == "aligned") {
-			ColumnExpression ce = new ColumnExpression("group");
-			ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(VieprotLib.Constants.ALIGNED_EDGES, String.class));
+			Predicate cp = getVieprotGroup(VieprotLib.Constants.ALIGNED_EDGES);
 			
 			JCheckBox jcb = (JCheckBox)e.getSource();
 			if(jcb.isSelected()) {
@@ -364,6 +374,12 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		}
 	}
     
+	private Predicate getVieprotGroup(String s) {
+		ColumnExpression ce = new ColumnExpression("group");
+		ComparisonPredicate cp = new ComparisonPredicate(ComparisonPredicate.EQ, ce, Literal.getLiteral(s, String.class));
+		return cp;
+	}
+	
 	private void setAllVisible(boolean visible) {
 		Iterator visibleItems = m_vis.getGroup(graph).tuples();
 		while(visibleItems.hasNext()) {
@@ -413,7 +429,6 @@ public class ModuleViewer extends JPanel implements ActionListener {
             label = "label";
         } else {
             try {
-                //g = new GraphMLReader().readGraph(datafile);
                 GraphCollection gc = new GraphCollectionMLReader().readGraphCollection(datafile);
             	label = "id";
             	g = gc.getGraph(0);
