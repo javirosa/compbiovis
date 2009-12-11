@@ -7,6 +7,7 @@ import java.util.Iterator;
 import org.xml.sax.SAXException;
 
 import prefuse.data.Graph;
+import prefuse.data.Schema;
 import prefuse.data.Table;
 import prefuse.data.Tuple;
 import prefuse.data.tuple.TupleSet;
@@ -50,11 +51,15 @@ public class GraphCollection {
 			HashMap<String, Integer> edgeMap = new HashMap<String, Integer>();
 			
 			Graph g0 = graphs.get(0);
-			Table masterNodes = g0.getNodeTable().getSchema().instantiate();
+			Schema nodeSchema = (Schema)g0.getNodeTable().getSchema().clone();
+			nodeSchema.addColumn(VieprotLib.Constants.MODULE_PARTICIPATION, int.class);
+			nodeSchema.addColumn(VieprotLib.Constants.TOTAL_DEGREE, int.class);
+			Table masterNodes = nodeSchema.instantiate();
 			Table masterEdges = g0.getEdgeTable().getSchema().instantiate();
 		
 			int curNodeRow = 0;
 			int curEdgeRow = 0;
+			HashMap<Integer, Integer> globalDegree = new HashMap<Integer, Integer>();
 			for(int i=0; i<graphs.size(); i++) {
 				Graph g = graphs.get(i);
 				Iterator nodes = g.getNodes().tuples();
@@ -62,9 +67,14 @@ public class GraphCollection {
 					Tuple n = (Tuple)nodes.next();
 					String id = n.getString("id");
 					if(!nodeMap.containsKey(id)) {
-						masterNodes.addTuple(n);
+						Tuple t = masterNodes.addTuple(n);
+						t.setInt(VieprotLib.Constants.MODULE_PARTICIPATION, 1);
 						nodeMap.put(id, curNodeRow);
 						curNodeRow++;
+					}
+					else {
+						Tuple t = masterNodes.getTuple(nodeMap.get(id));
+						t.setInt(VieprotLib.Constants.MODULE_PARTICIPATION, t.getInt(VieprotLib.Constants.MODULE_PARTICIPATION)+1);
 					}
 				}
 				
@@ -75,6 +85,21 @@ public class GraphCollection {
 					if(!edgeMap.containsKey(id)) {
 						masterEdges.addTuple(e);
 						edgeMap.put(id, curEdgeRow);
+						int source = e.getInt("source");
+						int target = e.getInt("target");
+						if(!globalDegree.containsKey(source))
+							globalDegree.put(source, 0);
+						if(!globalDegree.containsKey(target))
+							globalDegree.put(target, 0);
+						
+						int newVal = globalDegree.get(source) + 1;
+						globalDegree.remove(source);
+						globalDegree.put(source, newVal);
+						
+						newVal = globalDegree.get(target) + 1;
+						globalDegree.remove(target);
+						globalDegree.put(target, newVal);
+						
 						curEdgeRow++;
 					}
 				}

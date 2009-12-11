@@ -1,43 +1,40 @@
-import java.awt.BorderLayout;
+import static javax.swing.GroupLayout.Alignment.BASELINE;
+import static javax.swing.GroupLayout.Alignment.LEADING;
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
+import javax.swing.GroupLayout;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import prefuse.data.Graph;
 import prefuse.data.io.GraphCollection;
-import prefuse.data.io.GraphCollectionMLReader;
-import prefuse.util.GraphLib;
-import prefuse.util.ui.UILib;
 
-
-public class ModuleBrowser extends JPanel implements ListSelectionListener {
+public class ModuleBrowser extends JPanel implements ListSelectionListener, ActionListener {
 
 	private GraphCollection modules;
 	private ModuleViewer view;
-	
-	public ModuleBrowser() {
+
+	public ModuleBrowser(GraphCollection gc, ModuleViewer v) {
+		modules = gc;
+		view = v;
 		
-	}
-	
-    public ModuleBrowser(GraphCollection gc, String label) {
-    	super(new BorderLayout());
-        
-    	modules = gc;
-    	
-        // --------------------------------------------------------------------        
-        // launch the visualization
-        view = new ModuleViewer(modules.getGraph(0), label);
-    	
-        // --------------------------------------------------------------------        
-        // launch the visualization
-    	
+		//Create the sorting combo box
+		JLabel sortLabel = new JLabel("Sort on:", JLabel.RIGHT);
+		
+		String[] sortOptions = {"# proteins", "# aligned edges", "Avg. degree of node"};
+		JComboBox sortBox = new JComboBox(sortOptions);
+		
         // Create the JList with all the conserved modules
         DefaultListModel graphIDs= new DefaultListModel();
         for(int i=0; i<modules.numGraphs(); i++) {
@@ -48,82 +45,35 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener {
         modules.setSelectedIndex(0);
         modules.addListSelectionListener(this);      
         JScrollPane moduleScrollPanel = new JScrollPane(modules);
+        //moduleScrollPanel.setPreferredSize(new Dimension(100,900));
+        //moduleScrollPanel.setPreferredSize(this.getSize());
         
-        // create a new JSplitPane to present the interface
-        JSplitPane split = new JSplitPane();
-        split.setLeftComponent(moduleScrollPanel);
-        split.setRightComponent(view);
-        split.setOneTouchExpandable(true);
-        split.setContinuousLayout(false);
-        split.setDividerLocation(100);
+        GroupLayout layout = new GroupLayout(this);
+        this.setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
         
-        add(split);
-    }
-	
-    // ------------------------------------------------------------------------
-    // Main and demo methods
-    
-    public static void main(String[] args) {
-        UILib.setPlatformLookAndFeel();
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        				.addComponent(sortLabel)
+        				.addComponent(sortBox))
+        		.addComponent(moduleScrollPanel)
+        	);
         
-        // create graphview
-        String datafile = null;
-        String label = "label";
-        if ( args.length > 1 ) {
-            datafile = args[0];
-            label = args[1];
-        }
-        
-        datafile = "208Modules.xml";
-        
-        JFrame frame = demo(datafile, label);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    
-    public static JFrame demo() {
-        return demo((String)null, "label");
-    }
-    
-    public static JFrame demo(String datafile, String label) {
-        GraphCollection gc = null;
-        if ( datafile == null ) {
-        	gc = new GraphCollection();
-            Graph g = GraphLib.getGrid(15,15);
-            g.putClientProperty("id", "0");
-            label = "label";
-        } else {
-            try {
-                //g = new GraphMLReader().readGraph(datafile);
-                gc = new GraphCollectionMLReader().readGraphCollection(datafile);
-                gc.createMasterGraph();
-            	label = "id";
-                printGraphInfo(gc.getGraph(0));
-            } catch ( Exception e ) {
-                e.printStackTrace();
-                System.exit(1);
-            }
-        }
-        return demo(gc, label);
-    }
-    
+        layout.setVerticalGroup(layout.createSequentialGroup()
+        		.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        				.addComponent(sortLabel)
+        				.addComponent(sortBox))
+        		.addComponent(moduleScrollPanel)
+        	);
+	}
+
     public static void printGraphInfo(Graph g) {
     	System.out.println(g.getNodeTable().getSchema().toString());
     	System.out.println(g.getEdgeTable().getSchema().toString());
     	System.out.format("# nodes: %d | # edges: %d\n", g.getNodeCount(), g.getEdgeCount());
     }
-    
-    public static JFrame demo(GraphCollection gc, String label) {
-        ModuleBrowser browser = new ModuleBrowser(gc, label);
-    	
-    	// launch window
-        JFrame frame = new JFrame("v i e p r o t");
-        frame.setContentPane(browser);
-        frame.pack();
-        frame.setVisible(true);
-        
-        return frame;   	
-    }
-
+	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if(!e.getValueIsAdjusting()) {
@@ -132,5 +82,11 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener {
 			printGraphInfo(g);
 			view.setGraph(g,"id");
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+        JComboBox cb = (JComboBox)e.getSource();
+        String sortOption = (String)cb.getSelectedItem();
 	}
 }
