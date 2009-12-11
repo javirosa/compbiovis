@@ -95,6 +95,7 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener {
             try {
                 //g = new GraphMLReader().readGraph(datafile);
                 gc = new GraphCollectionMLReader().readGraphCollection(datafile);
+                gc.createMasterGraph();
             	label = "id";
                 printGraphInfo(gc.getGraph(0));
             } catch ( Exception e ) {
