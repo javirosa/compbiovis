@@ -49,6 +49,7 @@ import prefuse.controls.DragControl;
 import prefuse.controls.FocusControl;
 import prefuse.controls.NeighborHighlightControl;
 import prefuse.controls.PanControl;
+import prefuse.controls.ToolTipControl;
 import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.controls.ZoomToFitControl;
@@ -81,6 +82,7 @@ import prefuse.util.ui.JValueSlider;
 import prefuse.util.ui.UILib;
 import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
+import prefuse.visual.expression.InGroupPredicate;
 
 public class ModuleViewer extends JPanel implements ActionListener {
 
@@ -167,7 +169,6 @@ public class ModuleViewer extends JPanel implements ActionListener {
         alignedEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.ALIGNED_EDGES);
         ForceSimulator alignedEdgeForces = alignedEdgeLayout.getForceSimulator();
         
-        
         //animate.add(new ForceDirectedLayout(graph, true));
         animate.add(fill);
         animate.add(new RepaintAction());
@@ -182,7 +183,6 @@ public class ModuleViewer extends JPanel implements ActionListener {
         
         // --------------------------------------------------------------------
         // set up a display to show the visualization
-        
         Display display = new Display(m_vis);
         display.setSize(700,700);
         display.pan(350, 350);
@@ -197,14 +197,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         display.addControlListener(new WheelZoomControl());
         display.addControlListener(new ZoomToFitControl());
         display.addControlListener(new NeighborHighlightControl());
-
-        // overview display
-//        Display overview = new Display(vis);
-//        overview.setSize(290,290);
-//        overview.addItemBoundsListener(new FitOverviewListener());
-        
-        display.setForeground(Color.GRAY);
-        display.setBackground(Color.WHITE);
+        display.addControlListener(new ToolTipControl("weight"));
         
         // --------------------------------------------------------------------        
         // launch the visualization
@@ -344,7 +337,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			internalEdges.addTuple((Tuple)internalEdgeTuples.next());
 		}
 
-        m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
+        //m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
         VisualItem f = (VisualItem)vg.getNode(0);
         m_vis.getGroup(Visualization.FOCUS_ITEMS).setTuple(f);
         f.setFixed(false);
@@ -478,40 +471,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
     public static JFrame demo(Graph g, String label) {
         final ModuleViewer view = new ModuleViewer(g, label);
         
-        // set up menu
-        JMenu dataMenu = new JMenu("Data");
-        dataMenu.add(new OpenGraphAction(view));
-        dataMenu.add(new GraphMenuAction("Grid","ctrl 1",view) {
-            protected Graph getGraph() {
-                return GraphLib.getGrid(15,15);
-            }
-        });
-        dataMenu.add(new GraphMenuAction("Clique","ctrl 2",view) {
-            protected Graph getGraph() {
-                return GraphLib.getClique(10);
-            }
-        });
-        dataMenu.add(new GraphMenuAction("Honeycomb","ctrl 3",view) {
-            protected Graph getGraph() {
-                return GraphLib.getHoneycomb(5);
-            }
-        });
-        dataMenu.add(new GraphMenuAction("Balanced Tree","ctrl 4",view) {
-            protected Graph getGraph() {
-                return GraphLib.getBalancedTree(3,5);
-            }
-        });
-        dataMenu.add(new GraphMenuAction("Diamond Tree","ctrl 5",view) {
-            protected Graph getGraph() {
-                return GraphLib.getDiamondTree(3,3,3);
-            }
-        });
-        JMenuBar menubar = new JMenuBar();
-        menubar.add(dataMenu);
-        
         // launch window
         JFrame frame = new JFrame("v i e p r o t");
-        frame.setJMenuBar(menubar);
         frame.setContentPane(view);
         frame.pack();
         frame.setVisible(true);
