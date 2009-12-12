@@ -1,3 +1,5 @@
+package vieprot;
+
 import java.awt.BorderLayout;
 
 import javax.swing.DefaultListModel;
@@ -16,6 +18,8 @@ import prefuse.data.io.GraphCollectionMLReader;
 import prefuse.util.GraphLib;
 import prefuse.util.ui.UILib;
 
+import vieprot.browser.ModuleBrowser;
+import vieprot.viewer.ModuleViewer;
 
 public class Vieprot extends JPanel implements ListSelectionListener {
 

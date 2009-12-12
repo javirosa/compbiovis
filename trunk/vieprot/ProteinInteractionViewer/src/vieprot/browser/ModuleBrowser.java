@@ -1,3 +1,5 @@
+package vieprot.browser;
+
 import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.LEADING;
 
@@ -20,6 +22,10 @@ import javax.swing.event.ListSelectionListener;
 import prefuse.data.Graph;
 import prefuse.data.io.GraphCollection;
 
+import vieprot.browser.list.*;
+import vieprot.viewer.ModuleViewer;
+import vieprot.structures.*;
+
 public class ModuleBrowser extends JPanel implements ListSelectionListener, ActionListener {
 
 	private GraphCollection modules;
@@ -36,11 +42,21 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 		JComboBox sortBox = new JComboBox(sortOptions);
 		
         // Create the JList with all the conserved modules
+		SortableModuleListModel graphIDs = new SortableModuleListModel();
+		for(int i=0; i<modules.numGraphs(); i++) {
+			graphIDs.addElement(modules.getGraph(i));
+		}
+		
+		/*
         DefaultListModel graphIDs= new DefaultListModel();
-        for(int i=0; i<modules.numGraphs(); i++) {
+		for(int i=0; i<modules.numGraphs(); i++) {
         	graphIDs.addElement(modules.getID(i));
         }
+        */
         JList modules = new JList(graphIDs);
+        ModuleListItemRenderer renderer= new ModuleListItemRenderer();
+        modules.setCellRenderer(renderer);
+        
         modules.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         modules.setSelectedIndex(0);
         modules.addListSelectionListener(this);      
