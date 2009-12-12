@@ -2,6 +2,7 @@ package vieprot.browser.list;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Vector;
 
 import javax.swing.AbstractListModel;
 
@@ -13,8 +14,8 @@ import vieprot.comparators.*;
 
 public class SortableModuleListModel extends AbstractListModel {
 	
-	private LinkedList<GraphWithMetadata> data = new LinkedList<GraphWithMetadata>();
-	private static NumberOfNodesComparator numberOfNodesComparator = new NumberOfNodesComparator();
+	private Vector<GraphWithMetadata> data = new Vector<GraphWithMetadata>();
+	private static NumberOfNodesComparator numberOfNodesComparator = new NumberOfNodesComparator(false);
 	private static IDComparator idComparator = new IDComparator();
 	
 	public void addElement(Graph g) {
