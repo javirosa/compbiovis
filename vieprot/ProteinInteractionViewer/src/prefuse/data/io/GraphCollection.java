@@ -52,8 +52,8 @@ public class GraphCollection {
 			
 			Graph g0 = graphs.get(0);
 			Schema nodeSchema = (Schema)g0.getNodeTable().getSchema().clone();
-			nodeSchema.addColumn(VieprotLib.Constants.MODULE_PARTICIPATION, int.class);
-			nodeSchema.addColumn(VieprotLib.Constants.TOTAL_DEGREE, int.class);
+			nodeSchema.addColumn(vieprot.lib.Constants.MODULE_PARTICIPATION, int.class);
+			nodeSchema.addColumn(vieprot.lib.Constants.TOTAL_DEGREE, int.class);
 			Table masterNodes = nodeSchema.instantiate();
 			Table masterEdges = g0.getEdgeTable().getSchema().instantiate();
 		
@@ -68,13 +68,13 @@ public class GraphCollection {
 					String id = n.getString("id");
 					if(!nodeMap.containsKey(id)) {
 						Tuple t = masterNodes.addTuple(n);
-						t.setInt(VieprotLib.Constants.MODULE_PARTICIPATION, 1);
+						t.setInt(vieprot.lib.Constants.MODULE_PARTICIPATION, 1);
 						nodeMap.put(id, curNodeRow);
 						curNodeRow++;
 					}
 					else {
 						Tuple t = masterNodes.getTuple(nodeMap.get(id));
-						t.setInt(VieprotLib.Constants.MODULE_PARTICIPATION, t.getInt(VieprotLib.Constants.MODULE_PARTICIPATION)+1);
+						t.setInt(vieprot.lib.Constants.MODULE_PARTICIPATION, t.getInt(vieprot.lib.Constants.MODULE_PARTICIPATION)+1);
 					}
 				}
 				

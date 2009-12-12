@@ -3,6 +3,7 @@ package vieprot.browser;
 import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.LEADING;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,13 +25,16 @@ import prefuse.data.io.GraphCollection;
 
 import vieprot.browser.list.*;
 import vieprot.viewer.ModuleViewer;
+import vieprot.lib.InterfaceConstants;
 import vieprot.structures.*;
 
 public class ModuleBrowser extends JPanel implements ListSelectionListener, ActionListener {
 
 	private GraphCollection modules;
 	private ModuleViewer view;
-
+	
+	private SortableModuleListModel graphIDs = new SortableModuleListModel();
+	
 	public ModuleBrowser(GraphCollection gc, ModuleViewer v) {
 		modules = gc;
 		view = v;
@@ -38,11 +42,12 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 		//Create the sorting combo box
 		JLabel sortLabel = new JLabel("Sort on:", JLabel.RIGHT);
 		
-		String[] sortOptions = {"# proteins", "# aligned edges", "Avg. degree of node"};
+		String[] sortOptions = {InterfaceConstants.SORT_OPTIONS_ID, InterfaceConstants.SORT_OPTIONS_NUM_NODES, 
+								"# aligned edges", "Avg. degree of node"};
 		JComboBox sortBox = new JComboBox(sortOptions);
+		sortBox.setSelectedItem("id");
 		
         // Create the JList with all the conserved modules
-		SortableModuleListModel graphIDs = new SortableModuleListModel();
 		for(int i=0; i<modules.numGraphs(); i++) {
 			graphIDs.addElement(modules.getGraph(i));
 		}
@@ -54,6 +59,8 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
         }
         */
         JList modules = new JList(graphIDs);
+        modules.setSelectionBackground(new Color(0,0,255));
+        modules.setSelectionForeground(new Color(0,0,0));
         ModuleListItemRenderer renderer= new ModuleListItemRenderer();
         modules.setCellRenderer(renderer);
         
@@ -94,7 +101,8 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 	public void valueChanged(ListSelectionEvent e) {
 		if(!e.getValueIsAdjusting()) {
 			JList dlm = (JList)e.getSource();
-			Graph g = modules.getGraph((String)dlm.getSelectedValue());
+			String selectedGraphID = ((GraphWithMetadata)dlm.getSelectedValue()).getID();
+			Graph g = modules.getGraph(selectedGraphID);
 			printGraphInfo(g);
 			view.setGraph(g,"id");
 		}
@@ -104,5 +112,6 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 	public void actionPerformed(ActionEvent e) {
         JComboBox cb = (JComboBox)e.getSource();
         String sortOption = (String)cb.getSelectedItem();
+        graphIDs.sort(sortOption);
 	}
 }
