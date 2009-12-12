@@ -85,6 +85,8 @@ import prefuse.util.ui.UILib;
 import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 import prefuse.visual.expression.InGroupPredicate;
+import vieprot.lib.Constants;
+import vieprot.lib.InterfaceConstants;
 
 public class ModuleViewer extends JPanel implements ActionListener {
 
@@ -143,7 +145,14 @@ public class ModuleViewer extends JPanel implements ActionListener {
 
         int hops = 30;
         final GraphDistanceFilter filter = new GraphDistanceFilter(graph, nodes, hops);
-
+        
+        // Coloring for module 0 nodes
+        ColorAction module0Fill = new ColorAction(Constants.MODULE_0,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_O_COLOR);
+        //module1Fill.add(VisualItem)
+        
+        // Coloring for module 1 nodes
+        ColorAction module1Fill = new ColorAction(Constants.MODULE_1,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_1_COLOR);
+        
         ColorAction fill = new ColorAction(nodes, 
                 VisualItem.FILLCOLOR, ColorLib.rgb(200,200,255));
         fill.add(VisualItem.FIXED, ColorLib.rgb(255,100,100));
@@ -151,7 +160,9 @@ public class ModuleViewer extends JPanel implements ActionListener {
         
         ActionList draw = new ActionList();
         draw.add(filter);
-        draw.add(fill);
+        //draw.add(fill);
+        draw.add(module0Fill);
+        draw.add(module1Fill);
         draw.add(new ColorAction(nodes, VisualItem.STROKECOLOR, 0));
         draw.add(new ColorAction(nodes, VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
         draw.add(new ColorAction(vieprot.lib.Constants.INTERNAL_EDGES, VisualItem.FILLCOLOR, ColorLib.gray(200)));
@@ -172,7 +183,9 @@ public class ModuleViewer extends JPanel implements ActionListener {
         ForceSimulator alignedEdgeForces = alignedEdgeLayout.getForceSimulator();
         
         //animate.add(new ForceDirectedLayout(graph, true));
-        animate.add(fill);
+        //animate.add(fill);
+        animate.add(module0Fill);
+        animate.add(module1Fill);
         animate.add(new RepaintAction());
         
         // finally, we register our ActionList with the Visualization.
@@ -325,7 +338,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         m_vis.removeGroup(vieprot.lib.Constants.ALIGNED_EDGES);
         m_vis.addFocusGroup(vieprot.lib.Constants.ALIGNED_EDGES);
         TupleSet ts = m_vis.getFocusGroup(vieprot.lib.Constants.ALIGNED_EDGES);
-		Iterator alignedEdgeTuples = m_vis.items(getVieprotGroup(vieprot.lib.Constants.ALIGNED_EDGES));
+		Iterator<Tuple> alignedEdgeTuples = m_vis.items(getVieprotGroup(vieprot.lib.Constants.ALIGNED_EDGES));
 		while(alignedEdgeTuples.hasNext()) {
 			ts.addTuple((Tuple)alignedEdgeTuples.next());
 		}
@@ -334,17 +347,35 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		m_vis.removeGroup(vieprot.lib.Constants.INTERNAL_EDGES);
 		m_vis.addFocusGroup(vieprot.lib.Constants.INTERNAL_EDGES);
 		TupleSet internalEdges = m_vis.getFocusGroup(vieprot.lib.Constants.INTERNAL_EDGES);
-		Iterator internalEdgeTuples = getInternalEdges();
+		Iterator<Tuple> internalEdgeTuples = getInternalEdges();
 		while(internalEdgeTuples.hasNext()) {
 			internalEdges.addTuple((Tuple)internalEdgeTuples.next());
 		}
-
+		
+		// module 0 group
+		m_vis.removeGroup(Constants.MODULE_0);
+		m_vis.addFocusGroup(Constants.MODULE_0);
+		TupleSet module0Set = m_vis.getFocusGroup(Constants.MODULE_0);
+		Iterator<Tuple> module0SetTuples = getModule0Nodes();
+		while(module0SetTuples.hasNext()) {
+			module0Set.addTuple(module0SetTuples.next());
+		}
+		
+		// module 1 group
+		m_vis.removeGroup(Constants.MODULE_1);
+		m_vis.addFocusGroup(Constants.MODULE_1);
+		TupleSet module1Set = m_vis.getFocusGroup(Constants.MODULE_1);
+		Iterator<Tuple> module1SetTuples = getModule1Nodes();
+		while(module1SetTuples.hasNext()) {
+			module1Set.addTuple(module1SetTuples.next());
+		}
+		
         //m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
         VisualItem f = (VisualItem)vg.getNode(0);
         m_vis.getGroup(Visualization.FOCUS_ITEMS).setTuple(f);
         f.setFixed(false);
     }
- 
+    
     // ------------------------------------------------------------------------
     // Event listeners
 	@Override
@@ -394,13 +425,21 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		return cp;
 	}
 	
-	private Iterator getAlignedEdges() {
-		return (Iterator)m_vis.getGroup(graph).tuples(getVieprotGroup(vieprot.lib.Constants.ALIGNED_EDGES));
+	private Iterator<Tuple> getModule0Nodes() {
+		return (Iterator<Tuple>)m_vis.getGroup(nodes).tuples(getVieprotGroup(Constants.MODULE_0));
 	}
 	
-	private Iterator getInternalEdges() {
+	private Iterator<Tuple> getModule1Nodes() {
+		return (Iterator<Tuple>)m_vis.getGroup(nodes).tuples(getVieprotGroup(Constants.MODULE_1));
+	}
+	
+	private Iterator<Tuple> getAlignedEdges() {
+		return (Iterator<Tuple>)m_vis.getGroup(graph).tuples(getVieprotGroup(vieprot.lib.Constants.ALIGNED_EDGES));
+	}
+	
+	private Iterator<Tuple> getInternalEdges() {
 		OrPredicate ap = new OrPredicate(getVieprotGroup(vieprot.lib.Constants.MODULE_0), getVieprotGroup(vieprot.lib.Constants.MODULE_1));
-		return (Iterator)m_vis.getGroup(edges).tuples(ap);
+		return (Iterator<Tuple>)m_vis.getGroup(edges).tuples(ap);
 	}
 	
 	private void setAllVisible(boolean visible) {
