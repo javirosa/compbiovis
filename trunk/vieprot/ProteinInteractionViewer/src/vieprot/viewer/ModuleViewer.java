@@ -154,21 +154,21 @@ public class ModuleViewer extends JPanel implements ActionListener {
         draw.add(fill);
         draw.add(new ColorAction(nodes, VisualItem.STROKECOLOR, 0));
         draw.add(new ColorAction(nodes, VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
-        draw.add(new ColorAction(VieprotLib.Constants.INTERNAL_EDGES, VisualItem.FILLCOLOR, ColorLib.gray(200)));
-        draw.add(new ColorAction(VieprotLib.Constants.INTERNAL_EDGES, VisualItem.STROKECOLOR, ColorLib.gray(200)));
-        draw.add(new ColorAction(VieprotLib.Constants.ALIGNED_EDGES, VisualItem.FILLCOLOR, ColorLib.rgba(200,0,0,30)));
-        draw.add(new ColorAction(VieprotLib.Constants.ALIGNED_EDGES, VisualItem.STROKECOLOR, ColorLib.rgba(200,0,0,30)));
+        draw.add(new ColorAction(vieprot.lib.Constants.INTERNAL_EDGES, VisualItem.FILLCOLOR, ColorLib.gray(200)));
+        draw.add(new ColorAction(vieprot.lib.Constants.INTERNAL_EDGES, VisualItem.STROKECOLOR, ColorLib.gray(200)));
+        draw.add(new ColorAction(vieprot.lib.Constants.ALIGNED_EDGES, VisualItem.FILLCOLOR, ColorLib.rgba(200,0,0,30)));
+        draw.add(new ColorAction(vieprot.lib.Constants.ALIGNED_EDGES, VisualItem.STROKECOLOR, ColorLib.rgba(200,0,0,30)));
         draw.add(new SizeAction(nodes));
         
         ActionList animate = new ActionList(Activity.INFINITY);
         
         ForceDirectedLayout internalEdgeLayout = new ForceDirectedLayout(graph, true);
-        internalEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.INTERNAL_EDGES);
+        internalEdgeLayout.setDataGroups(nodes, vieprot.lib.Constants.INTERNAL_EDGES);
         animate.add(internalEdgeLayout);
 
         // For later: add lighter forces to the aligned edges.
         ForceDirectedLayout alignedEdgeLayout = new ForceDirectedLayout(graph, true);
-        alignedEdgeLayout.setDataGroups(nodes, VieprotLib.Constants.ALIGNED_EDGES);
+        alignedEdgeLayout.setDataGroups(nodes, vieprot.lib.Constants.ALIGNED_EDGES);
         ForceSimulator alignedEdgeForces = alignedEdgeLayout.getForceSimulator();
         
         //animate.add(new ForceDirectedLayout(graph, true));
@@ -322,18 +322,18 @@ public class ModuleViewer extends JPanel implements ActionListener {
          */
         
         // Aligned edge group
-        m_vis.removeGroup(VieprotLib.Constants.ALIGNED_EDGES);
-        m_vis.addFocusGroup(VieprotLib.Constants.ALIGNED_EDGES);
-        TupleSet ts = m_vis.getFocusGroup(VieprotLib.Constants.ALIGNED_EDGES);
-		Iterator alignedEdgeTuples = m_vis.items(getVieprotGroup(VieprotLib.Constants.ALIGNED_EDGES));
+        m_vis.removeGroup(vieprot.lib.Constants.ALIGNED_EDGES);
+        m_vis.addFocusGroup(vieprot.lib.Constants.ALIGNED_EDGES);
+        TupleSet ts = m_vis.getFocusGroup(vieprot.lib.Constants.ALIGNED_EDGES);
+		Iterator alignedEdgeTuples = m_vis.items(getVieprotGroup(vieprot.lib.Constants.ALIGNED_EDGES));
 		while(alignedEdgeTuples.hasNext()) {
 			ts.addTuple((Tuple)alignedEdgeTuples.next());
 		}
 		
 		// Internal edge group
-		m_vis.removeGroup(VieprotLib.Constants.INTERNAL_EDGES);
-		m_vis.addFocusGroup(VieprotLib.Constants.INTERNAL_EDGES);
-		TupleSet internalEdges = m_vis.getFocusGroup(VieprotLib.Constants.INTERNAL_EDGES);
+		m_vis.removeGroup(vieprot.lib.Constants.INTERNAL_EDGES);
+		m_vis.addFocusGroup(vieprot.lib.Constants.INTERNAL_EDGES);
+		TupleSet internalEdges = m_vis.getFocusGroup(vieprot.lib.Constants.INTERNAL_EDGES);
 		Iterator internalEdgeTuples = getInternalEdges();
 		while(internalEdgeTuples.hasNext()) {
 			internalEdges.addTuple((Tuple)internalEdgeTuples.next());
@@ -356,14 +356,14 @@ public class ModuleViewer extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand() == "m0") {
 			setAllVisible(false);
-			Predicate cp = getVieprotGroup(VieprotLib.Constants.MODULE_0);
+			Predicate cp = getVieprotGroup(vieprot.lib.Constants.MODULE_0);
 			setVisible(ts,cp,true);
 			
 			alignedEdges.setEnabled(false);
 		}
 		else if(e.getActionCommand() == "m1") {
 			setAllVisible(false);
-			Predicate cp = getVieprotGroup(VieprotLib.Constants.MODULE_1);
+			Predicate cp = getVieprotGroup(vieprot.lib.Constants.MODULE_1);
 			setVisible(ts,cp,true);
 			
 			alignedEdges.setEnabled(false);
@@ -374,7 +374,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			setAllVisible(true);
 		}
 		else if(e.getActionCommand() == "aligned") {
-			Predicate cp = getVieprotGroup(VieprotLib.Constants.ALIGNED_EDGES);
+			Predicate cp = getVieprotGroup(vieprot.lib.Constants.ALIGNED_EDGES);
 			
 			JCheckBox jcb = (JCheckBox)e.getSource();
 			if(jcb.isSelected()) {
@@ -395,11 +395,11 @@ public class ModuleViewer extends JPanel implements ActionListener {
 	}
 	
 	private Iterator getAlignedEdges() {
-		return (Iterator)m_vis.getGroup(graph).tuples(getVieprotGroup(VieprotLib.Constants.ALIGNED_EDGES));
+		return (Iterator)m_vis.getGroup(graph).tuples(getVieprotGroup(vieprot.lib.Constants.ALIGNED_EDGES));
 	}
 	
 	private Iterator getInternalEdges() {
-		OrPredicate ap = new OrPredicate(getVieprotGroup(VieprotLib.Constants.MODULE_0), getVieprotGroup(VieprotLib.Constants.MODULE_1));
+		OrPredicate ap = new OrPredicate(getVieprotGroup(vieprot.lib.Constants.MODULE_0), getVieprotGroup(vieprot.lib.Constants.MODULE_1));
 		return (Iterator)m_vis.getGroup(edges).tuples(ap);
 	}
 	

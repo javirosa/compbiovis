@@ -13,7 +13,9 @@ public class GraphWithMetadata {
 	
 	public int getNumberOfNodes() { return numberOfNodes; }
 	
+	public String getID() { return (String)g.getClientProperty("id"); }
+	
 	public String toString() {
-		return String.format("%s | # nodes: %d",g.getClientProperty("id"), numberOfNodes);
+		return String.format("%s\t|\t# nodes: %d",g.getClientProperty("id"), numberOfNodes);
 	}
 }

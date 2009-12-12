@@ -2,6 +2,7 @@ package vieprot;
 
 import java.awt.BorderLayout;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -72,6 +73,8 @@ public class Vieprot extends JPanel implements ListSelectionListener {
     
     public static void main(String[] args) {
         UILib.setPlatformLookAndFeel();
+        
+        //DefaultListCellRenderer dcr;
         
         // create graphview
         String datafile = null;
