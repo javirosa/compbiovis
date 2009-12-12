@@ -46,14 +46,15 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 								"# aligned edges", "Avg. degree of node"};
 		JComboBox sortBox = new JComboBox(sortOptions);
 		sortBox.setSelectedItem("id");
+		sortBox.addActionListener(this);
 		
         // Create the JList with all the conserved modules
 		for(int i=0; i<modules.numGraphs(); i++) {
 			graphIDs.addElement(modules.getGraph(i));
 		}
 		
+        DefaultListModel temp= new DefaultListModel();
 		/*
-        DefaultListModel graphIDs= new DefaultListModel();
 		for(int i=0; i<modules.numGraphs(); i++) {
         	graphIDs.addElement(modules.getID(i));
         }
