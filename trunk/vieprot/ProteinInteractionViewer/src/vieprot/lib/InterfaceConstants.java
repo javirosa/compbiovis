@@ -6,9 +6,13 @@ public class InterfaceConstants {
 
 	public static String SORT_OPTIONS_ID = "id";
 	public static String SORT_OPTIONS_NUM_NODES = "# proteins";
+	public static String SORT_OPTIONS_ALIGNED_EDGES = "# aligned edges";
 	
 	// Colors
-	public static int MODULE_O_COLOR = ColorLib.rgb(255, 121, 121);
-	public static int MODULE_1_COLOR = ColorLib.rgb(121, 174, 255);
+	public static int MODULE_O_FILL_COLOR = ColorLib.rgb(255, 162, 162);
+	public static int MODULE_1_FILL_COLOR = ColorLib.rgb(121, 174, 255);
+	
+	public static int ALIGNED_EDGE_STROKE_COLOR = ColorLib.rgba(200,0,0,30);
+	public static int ALIGNED_EDGE_HIGHLIGHT_COLOR = ColorLib.rgba(200, 0, 0, 255);
 
 }

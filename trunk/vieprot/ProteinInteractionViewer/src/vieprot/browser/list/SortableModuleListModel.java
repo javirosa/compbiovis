@@ -17,6 +17,7 @@ public class SortableModuleListModel extends AbstractListModel {
 	private Vector<GraphWithMetadata> data = new Vector<GraphWithMetadata>();
 	private static NumberOfNodesComparator numberOfNodesComparator = new NumberOfNodesComparator(false);
 	private static IDComparator idComparator = new IDComparator();
+	private static NumberOfAlignedEdgesComparator aec = new NumberOfAlignedEdgesComparator(false);
 	
 	public void addElement(Graph g) {
 		GraphWithMetadata gmd = new GraphWithMetadata(g);
@@ -33,6 +34,8 @@ public class SortableModuleListModel extends AbstractListModel {
 			sortByID();
 		else if(option == InterfaceConstants.SORT_OPTIONS_NUM_NODES)
 			sortByNumberOfNodes();
+		else if(option == InterfaceConstants.SORT_OPTIONS_ALIGNED_EDGES)
+			sortByAlignedEdges();
 	}
 	
 	public void sortByNumberOfNodes() {
@@ -42,6 +45,11 @@ public class SortableModuleListModel extends AbstractListModel {
 
 	public void sortByID() {
 		Collections.sort(data, idComparator);
+		this.fireContentsChanged(this, 0, data.size()-1);
+	}
+	
+	public void sortByAlignedEdges() {
+		Collections.sort(data, aec);
 		this.fireContentsChanged(this, 0, data.size()-1);
 	}
 	
