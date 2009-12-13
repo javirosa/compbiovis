@@ -43,7 +43,7 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 		JLabel sortLabel = new JLabel("Sort on:", JLabel.RIGHT);
 		
 		String[] sortOptions = {InterfaceConstants.SORT_OPTIONS_ID, InterfaceConstants.SORT_OPTIONS_NUM_NODES, 
-								"# aligned edges", "Avg. degree of node"};
+								InterfaceConstants.SORT_OPTIONS_ALIGNED_EDGES, "Avg. degree of node"};
 		JComboBox sortBox = new JComboBox(sortOptions);
 		sortBox.setSelectedItem("id");
 		sortBox.addActionListener(this);

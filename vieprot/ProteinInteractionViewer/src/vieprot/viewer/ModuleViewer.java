@@ -48,6 +48,7 @@ import prefuse.action.filter.GraphDistanceFilter;
 import prefuse.action.layout.graph.ForceDirectedLayout;
 import prefuse.activity.Activity;
 import prefuse.controls.DragControl;
+import prefuse.controls.EdgeHighlighter;
 import prefuse.controls.FocusControl;
 import prefuse.controls.NeighborHighlightControl;
 import prefuse.controls.PanControl;
@@ -147,16 +148,20 @@ public class ModuleViewer extends JPanel implements ActionListener {
         final GraphDistanceFilter filter = new GraphDistanceFilter(graph, nodes, hops);
         
         // Coloring for module 0 nodes
-        ColorAction module0Fill = new ColorAction(Constants.MODULE_0,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_O_COLOR);
+        ColorAction module0Fill = new ColorAction(Constants.MODULE_0,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_O_FILL_COLOR);
         //module1Fill.add(VisualItem)
         
         // Coloring for module 1 nodes
-        ColorAction module1Fill = new ColorAction(Constants.MODULE_1,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_1_COLOR);
+        ColorAction module1Fill = new ColorAction(Constants.MODULE_1,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_1_FILL_COLOR);
         
         ColorAction fill = new ColorAction(nodes, 
                 VisualItem.FILLCOLOR, ColorLib.rgb(200,200,255));
         fill.add(VisualItem.FIXED, ColorLib.rgb(255,100,100));
         fill.add(VisualItem.HIGHLIGHT, ColorLib.rgb(255,200,125));
+        
+        ColorAction alignedEdge = new ColorAction(vieprot.lib.Constants.ALIGNED_EDGES,
+        							VisualItem.STROKECOLOR, InterfaceConstants.ALIGNED_EDGE_STROKE_COLOR);
+        alignedEdge.add(VisualItem.HIGHLIGHT, InterfaceConstants.ALIGNED_EDGE_HIGHLIGHT_COLOR);
         
         ActionList draw = new ActionList();
         draw.add(filter);
@@ -165,10 +170,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
         draw.add(module1Fill);
         draw.add(new ColorAction(nodes, VisualItem.STROKECOLOR, 0));
         draw.add(new ColorAction(nodes, VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
-        draw.add(new ColorAction(vieprot.lib.Constants.INTERNAL_EDGES, VisualItem.FILLCOLOR, ColorLib.gray(200)));
         draw.add(new ColorAction(vieprot.lib.Constants.INTERNAL_EDGES, VisualItem.STROKECOLOR, ColorLib.gray(200)));
-        draw.add(new ColorAction(vieprot.lib.Constants.ALIGNED_EDGES, VisualItem.FILLCOLOR, ColorLib.rgba(200,0,0,30)));
-        draw.add(new ColorAction(vieprot.lib.Constants.ALIGNED_EDGES, VisualItem.STROKECOLOR, ColorLib.rgba(200,0,0,30)));
+        draw.add(alignedEdge);
         draw.add(new SizeAction(nodes));
         
         ActionList animate = new ActionList(Activity.INFINITY);
@@ -180,12 +183,12 @@ public class ModuleViewer extends JPanel implements ActionListener {
         // For later: add lighter forces to the aligned edges.
         ForceDirectedLayout alignedEdgeLayout = new ForceDirectedLayout(graph, true);
         alignedEdgeLayout.setDataGroups(nodes, vieprot.lib.Constants.ALIGNED_EDGES);
-        ForceSimulator alignedEdgeForces = alignedEdgeLayout.getForceSimulator();
+        //ForceSimulator alignedEdgeForces = alignedEdgeLayout.getForceSimulator();
         
         //animate.add(new ForceDirectedLayout(graph, true));
         //animate.add(fill);
-        animate.add(module0Fill);
-        animate.add(module1Fill);
+        //animate.add(module0Fill);
+        //animate.add(module1Fill);
         animate.add(new RepaintAction());
         
         // finally, we register our ActionList with the Visualization.
@@ -212,6 +215,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         display.addControlListener(new WheelZoomControl());
         display.addControlListener(new ZoomToFitControl());
         display.addControlListener(new NeighborHighlightControl());
+        display.addControlListener(new EdgeHighlighter());
         display.addControlListener(new ToolTipControl("weight"));
         
         // --------------------------------------------------------------------        
