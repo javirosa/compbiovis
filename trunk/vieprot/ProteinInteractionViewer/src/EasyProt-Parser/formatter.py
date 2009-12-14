@@ -158,8 +158,8 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdr
 			f.write('<data key="d2">'+newAnnotation+'</data>\n')
 		
 		if str(identifier) in self.analysisAnnotations:
-			f.write('>\n')
 			if hasAnnotation == False:
+				f.write('>\n')
 				self.indentLevel += 1
 			self.indent(f)
 			f.write('<data key="d3">'+str(self.analysisAnnotations[str(identifier)])+'</data>\n')
