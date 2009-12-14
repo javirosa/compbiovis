@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -24,6 +25,7 @@ import prefuse.data.Graph;
 import prefuse.data.io.GraphCollection;
 
 import vieprot.browser.list.*;
+import vieprot.browser.table.GOAnnotationTableModel;
 import vieprot.viewer.ModuleViewer;
 import vieprot.lib.InterfaceConstants;
 import vieprot.structures.*;
