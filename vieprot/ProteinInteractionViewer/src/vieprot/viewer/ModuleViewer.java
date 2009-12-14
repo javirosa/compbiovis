@@ -32,6 +32,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -106,6 +107,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
     
     private JCheckBox alignedEdges;
     protected JTable GOAnnotationTable;
+    protected JTextArea nodeInfo;
     protected VieprotFocusControl vieprotFocus;
     
     public ModuleViewer(Graph g, String label) {
@@ -232,6 +234,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         ForceSimulator fsim = ((ForceDirectedLayout)animate.get(0)).getForceSimulator();
         JForcePanel fpanel = new JForcePanel(fsim);
         
+        /*
         final JValueSlider slider = new JValueSlider("Distance", 0, hops, hops);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -247,6 +250,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         cf.add(slider);
         cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
         fpanel.add(cf);
+        */
         
         /*
          * create a radio button group to test module visibility filter
@@ -305,17 +309,29 @@ public class ModuleViewer extends JPanel implements ActionListener {
         aebox.setBorder(BorderFactory.createTitledBorder("Show aligned edges"));
         fpanel.add(aebox);
         
+        // Set up node info box
+        nodeInfo = new JTextArea(4,20);
+        nodeInfo.setEditable(false);
+        Box nodeInfoBox = new Box(BoxLayout.Y_AXIS);
+        nodeInfoBox.setVisible(false);
+        nodeInfoBox.add(nodeInfo);
+        nodeInfoBox.setBorder(BorderFactory.createTitledBorder("Node information"));
+        vieprotFocus.setNodeInfoBox(nodeInfoBox);
+        vieprotFocus.setNodeInfoArea(nodeInfo);
+        fpanel.add(nodeInfoBox);        
+        
+        // Set up annotation table
         GOAnnotationTable = new JTable(new GOAnnotationTableModel());
         GOAnnotationTable.setDefaultRenderer(String.class, new GOAnnotationTableCellRenderer());
         JScrollPane tableScrollPane = new JScrollPane(GOAnnotationTable);
         Box gatbox = new Box(BoxLayout.Y_AXIS);
-        
         gatbox.add(tableScrollPane);
         gatbox.setBorder(BorderFactory.createTitledBorder("GO Annotations"));
         gatbox.setVisible(false);
         vieprotFocus.setBox(gatbox);
         vieprotFocus.setTable(GOAnnotationTable);
         fpanel.add(gatbox);
+
         
         //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         //table.setFillsViewportHeight(true);

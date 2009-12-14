@@ -46,17 +46,6 @@ public class Vieprot extends JPanel implements ListSelectionListener {
         // launch the visualization
     	
         // Create the JList with all the conserved modules
-        /*
-        DefaultListModel graphIDs= new DefaultListModel();
-        for(int i=0; i<modules.numGraphs(); i++) {
-        	graphIDs.addElement(modules.getID(i));
-        }
-        JList modules = new JList(graphIDs);
-        modules.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        modules.setSelectedIndex(0);
-        modules.addListSelectionListener(this);      
-        JScrollPane moduleScrollPanel = new JScrollPane(modules);
-        */
         ModuleBrowser moduleScrollPanel = new ModuleBrowser(modules, view);
         
         // create a new JSplitPane to present the interface
@@ -65,7 +54,7 @@ public class Vieprot extends JPanel implements ListSelectionListener {
         split.setRightComponent(view);
         split.setOneTouchExpandable(true);
         split.setContinuousLayout(false);
-        split.setDividerLocation(200);
+        split.setDividerLocation(250);
         
         add(split);
     }
