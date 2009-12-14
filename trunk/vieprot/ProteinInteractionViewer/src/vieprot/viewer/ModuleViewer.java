@@ -31,6 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -53,6 +54,7 @@ import prefuse.controls.FocusControl;
 import prefuse.controls.NeighborHighlightControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.ToolTipControl;
+import prefuse.controls.VieprotFocusControl;
 import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.controls.ZoomToFitControl;
@@ -86,6 +88,8 @@ import prefuse.util.ui.UILib;
 import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 import prefuse.visual.expression.InGroupPredicate;
+import vieprot.browser.table.GOAnnotationTableCellRenderer;
+import vieprot.browser.table.GOAnnotationTableModel;
 import vieprot.lib.Constants;
 import vieprot.lib.InterfaceConstants;
 
@@ -101,6 +105,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
     private Visualization m_vis;
     
     private JCheckBox alignedEdges;
+    protected JTable GOAnnotationTable;
+    protected VieprotFocusControl vieprotFocus;
     
     public ModuleViewer(Graph g, String label) {
     	super(new BorderLayout());
@@ -156,12 +162,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         ColorAction module1Fill = new ColorAction(Constants.MODULE_1,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_1_FILL_COLOR);
         module1Fill.add(VisualItem.FIXED, InterfaceConstants.MODULE_1_HIGHLIGHT_COLOR);
         module1Fill.add(VisualItem.HIGHLIGHT, InterfaceConstants.MODULE_1_HIGHLIGHT_COLOR);
-        
-        ColorAction fill = new ColorAction(nodes, 
-                VisualItem.FILLCOLOR, ColorLib.rgb(200,200,255));
-        fill.add(VisualItem.FIXED, ColorLib.rgb(255,100,100));
-        fill.add(VisualItem.HIGHLIGHT, ColorLib.rgb(255,200,125));
-        
+
         ColorAction alignedEdge = new ColorAction(vieprot.lib.Constants.ALIGNED_EDGES,
         							VisualItem.STROKECOLOR, InterfaceConstants.ALIGNED_EDGE_STROKE_COLOR);
         alignedEdge.add(VisualItem.HIGHLIGHT, InterfaceConstants.ALIGNED_EDGE_HIGHLIGHT_COLOR);
@@ -211,7 +212,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
         display.setBackground(Color.WHITE);
         
         // main display controls
-        display.addControlListener(new FocusControl(1));
+        vieprotFocus = new VieprotFocusControl(1);
+        display.addControlListener(vieprotFocus);
         display.addControlListener(new DragControl());
         display.addControlListener(new PanControl());
         display.addControlListener(new ZoomControl());
@@ -303,6 +305,21 @@ public class ModuleViewer extends JPanel implements ActionListener {
         aebox.setBorder(BorderFactory.createTitledBorder("Show aligned edges"));
         fpanel.add(aebox);
         
+        GOAnnotationTable = new JTable(new GOAnnotationTableModel());
+        GOAnnotationTable.setDefaultRenderer(String.class, new GOAnnotationTableCellRenderer());
+        JScrollPane tableScrollPane = new JScrollPane(GOAnnotationTable);
+        Box gatbox = new Box(BoxLayout.Y_AXIS);
+        
+        gatbox.add(tableScrollPane);
+        gatbox.setBorder(BorderFactory.createTitledBorder("GO Annotations"));
+        gatbox.setVisible(false);
+        vieprotFocus.setBox(gatbox);
+        vieprotFocus.setTable(GOAnnotationTable);
+        fpanel.add(gatbox);
+        
+        //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        //table.setFillsViewportHeight(true);
+        
         // create a new JSplitPane to present the interface
         JSplitPane split = new JSplitPane();
         split.setLeftComponent(display);
@@ -367,10 +384,12 @@ public class ModuleViewer extends JPanel implements ActionListener {
 			module1Set.addTuple(module1SetTuples.next());
 		}
 		
+		m_vis.run("draw");
+		
         //m_vis.setValue(edges, null, VisualItem.INTERACTIVE, Boolean.FALSE);
-        VisualItem f = (VisualItem)vg.getNode(0);
-        m_vis.getGroup(Visualization.FOCUS_ITEMS).setTuple(f);
-        f.setFixed(false);
+        //VisualItem f = (VisualItem)vg.getNode(0);
+        //m_vis.getGroup(Visualization.FOCUS_ITEMS).setTuple(f);
+        //f.setFixed(false);
     }
     
     // ------------------------------------------------------------------------
