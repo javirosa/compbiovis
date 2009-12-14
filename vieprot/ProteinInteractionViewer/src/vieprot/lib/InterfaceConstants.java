@@ -17,5 +17,6 @@ public class InterfaceConstants {
 	
 	public static int ALIGNED_EDGE_STROKE_COLOR = ColorLib.rgba(200,0,0,30);
 	public static int ALIGNED_EDGE_HIGHLIGHT_COLOR = ColorLib.rgba(200, 0, 0, 255);
+	public static int[] INTERPOLATED_PALETTE = ColorLib.getInterpolatedPalette(ALIGNED_EDGE_STROKE_COLOR, ALIGNED_EDGE_HIGHLIGHT_COLOR);
 
 }
