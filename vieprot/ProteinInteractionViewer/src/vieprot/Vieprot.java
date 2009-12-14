@@ -27,6 +27,8 @@ public class Vieprot extends JPanel implements ListSelectionListener {
 	private GraphCollection modules;
 	private ModuleViewer view;
 	
+	public static String datafile = "produlesXML.xml";
+	
 	public Vieprot() {
 		
 	}
@@ -77,14 +79,7 @@ public class Vieprot extends JPanel implements ListSelectionListener {
         //DefaultListCellRenderer dcr;
         
         // create graphview
-        String datafile = null;
         String label = "label";
-        if ( args.length > 1 ) {
-            datafile = args[0];
-            label = args[1];
-        }
-        
-        datafile = "208Modules.xml";
         
         JFrame frame = demo(datafile, label);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

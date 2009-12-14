@@ -148,11 +148,14 @@ public class ModuleViewer extends JPanel implements ActionListener {
         final GraphDistanceFilter filter = new GraphDistanceFilter(graph, nodes, hops);
         
         // Coloring for module 0 nodes
-        ColorAction module0Fill = new ColorAction(Constants.MODULE_0,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_O_FILL_COLOR);
-        //module1Fill.add(VisualItem)
+        ColorAction module0Fill = new ColorAction(Constants.MODULE_0,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_0_FILL_COLOR);
+        module0Fill.add(VisualItem.FIXED, InterfaceConstants.MODULE_0_HIGHLIGHT_COLOR);
+        module0Fill.add(VisualItem.HIGHLIGHT, InterfaceConstants.MODULE_0_HIGHLIGHT_COLOR);
         
         // Coloring for module 1 nodes
         ColorAction module1Fill = new ColorAction(Constants.MODULE_1,VisualItem.FILLCOLOR, InterfaceConstants.MODULE_1_FILL_COLOR);
+        module1Fill.add(VisualItem.FIXED, InterfaceConstants.MODULE_1_HIGHLIGHT_COLOR);
+        module1Fill.add(VisualItem.HIGHLIGHT, InterfaceConstants.MODULE_1_HIGHLIGHT_COLOR);
         
         ColorAction fill = new ColorAction(nodes, 
                 VisualItem.FILLCOLOR, ColorLib.rgb(200,200,255));
@@ -187,8 +190,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
         
         //animate.add(new ForceDirectedLayout(graph, true));
         //animate.add(fill);
-        //animate.add(module0Fill);
-        //animate.add(module1Fill);
+        animate.add(module0Fill);
+        animate.add(module1Fill);
         animate.add(new RepaintAction());
         
         // finally, we register our ActionList with the Visualization.
@@ -299,16 +302,6 @@ public class ModuleViewer extends JPanel implements ActionListener {
         aebox.add(checkPanel);
         aebox.setBorder(BorderFactory.createTitledBorder("Show aligned edges"));
         fpanel.add(aebox);
-        
-        // Create the JList with all the conserved modules
-        DefaultListModel graphIDs= new DefaultListModel();
-        //listModel.addElement("Debbie Scott");
-        //listModel.addElement("Scott Hommel");
-        //listModel.addElement("Sharon Zakhour");
-        JList modules = new JList();
-        
-        
-        JScrollPane moduleScrollPanel = new JScrollPane(modules);
         
         // create a new JSplitPane to present the interface
         JSplitPane split = new JSplitPane();
