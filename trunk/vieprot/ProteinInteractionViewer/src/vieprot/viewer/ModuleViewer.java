@@ -45,6 +45,7 @@ import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.assignment.ColorAction;
+import prefuse.action.assignment.DataColorAction;
 import prefuse.action.assignment.SizeAction;
 import prefuse.action.filter.GraphDistanceFilter;
 import prefuse.action.layout.graph.ForceDirectedLayout;
@@ -165,8 +166,8 @@ public class ModuleViewer extends JPanel implements ActionListener {
         module1Fill.add(VisualItem.FIXED, InterfaceConstants.MODULE_1_HIGHLIGHT_COLOR);
         module1Fill.add(VisualItem.HIGHLIGHT, InterfaceConstants.MODULE_1_HIGHLIGHT_COLOR);
 
-        ColorAction alignedEdge = new ColorAction(vieprot.lib.Constants.ALIGNED_EDGES,
-        							VisualItem.STROKECOLOR, InterfaceConstants.ALIGNED_EDGE_STROKE_COLOR);
+        ColorAction alignedEdge = new DataColorAction(Constants.ALIGNED_EDGES, "weight", prefuse.Constants.NUMERICAL, VisualItem.STROKECOLOR,
+        						InterfaceConstants.INTERPOLATED_PALETTE);
         alignedEdge.add(VisualItem.HIGHLIGHT, InterfaceConstants.ALIGNED_EDGE_HIGHLIGHT_COLOR);
         
         ActionList draw = new ActionList();
@@ -202,6 +203,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         // Visualization, using the name we've chosen below.
         m_vis.putAction("draw", draw);
         m_vis.putAction("layout", animate);
+        m_vis.putAction("recolorEdge", alignedEdge);
 
         m_vis.runAfter("draw", "layout");
         
@@ -222,7 +224,7 @@ public class ModuleViewer extends JPanel implements ActionListener {
         display.addControlListener(new WheelZoomControl());
         display.addControlListener(new ZoomToFitControl());
         display.addControlListener(new NeighborHighlightControl());
-        display.addControlListener(new EdgeHighlighter());
+        display.addControlListener(new EdgeHighlighter("recolorEdge"));
         display.addControlListener(new ToolTipControl("weight"));
         
         // --------------------------------------------------------------------        

@@ -14,5 +14,4 @@ public class Constants {
 	public static String ANNOTATION_DELIMITER = "|";
 	
 	public static String[] GO_CATEGORIES = new String[] {"GOId", "Annotation Description", "Evidence Code", "Annotation Type"};
-
 }
