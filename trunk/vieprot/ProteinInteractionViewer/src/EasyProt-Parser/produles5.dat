@@ -1,0 +1,1277 @@
+Conserved Module 1
+
+ppiGraph[0]:
+protein: A6NLP3
+protein: P62837
+protein: Q96BQ3
+protein: Q9BV68
+protein: Q9C035
+protein: Q9H0F5
+PPI: (A6NLP3,P62837)
+PPI: (Q9BV68,P62837)
+PPI: (P62837,Q96BQ3)
+PPI: (P62837,Q9C035)
+PPI: (P62837,Q9H0F5)
+
+ppiGraph[1]:
+protein: A1Z9I6
+protein: P25867
+protein: Q8I0J6
+protein: Q9VXP1
+PPI: (Q9VXP1,P25867)
+PPI: (Q8I0J6,P25867)
+PPI: (A1Z9I6,P25867)
+
+Alignment Edges:
+aligned: (A6NLP3,Q9VXP1,0.0030)
+aligned: (Q9BV68,Q9VXP1,4.9)
+aligned: (Q9H0F5,Q9VXP1,1.5)
+aligned: (Q96BQ3,Q9VXP1,0.029)
+aligned: (Q9C035,Q9VXP1,0.0020)
+aligned: (A6NLP3,Q8I0J6,0.0030)
+aligned: (Q9BV68,Q8I0J6,0.0060)
+aligned: (Q9H0F5,Q8I0J6,0.56)
+aligned: (Q96BQ3,Q8I0J6,0.07)
+aligned: (Q9C035,Q8I0J6,0.0030)
+aligned: (Q9BV68,A1Z9I6,1.3)
+aligned: (Q9H0F5,A1Z9I6,9.3)
+aligned: (P62837,P25867,7.0E-81)
+
+
+Conserved Module 2
+
+ppiGraph[0]:
+protein: B3KSH4
+protein: O15344
+protein: Q99496
+protein: Q9BYJ4
+protein: Q9H6Y7
+PPI: (B3KSH4,Q99496)
+PPI: (B3KSH4,O15344)
+PPI: (B3KSH4,Q9BYJ4)
+PPI: (B3KSH4,Q9H6Y7)
+
+ppiGraph[1]:
+protein: A1Z9I6
+protein: P25867
+protein: Q8I0J6
+protein: Q9VXP1
+PPI: (P25867,A1Z9I6)
+PPI: (P25867,Q8I0J6)
+PPI: (P25867,Q9VXP1)
+
+Alignment Edges:
+aligned: (B3KSH4,P25867,0.74)
+aligned: (Q9BYJ4,Q8I0J6,4.0E-4)
+aligned: (Q99496,Q8I0J6,6.0E-7)
+aligned: (O15344,Q9VXP1,0.26)
+aligned: (Q9H6Y7,Q9VXP1,0.03)
+aligned: (Q9H6Y7,A1Z9I6,0.54)
+
+
+Conserved Module 3
+
+ppiGraph[0]:
+protein: A8MU64
+protein: B7Z7F9
+protein: O43293
+PPI: (O43293,B7Z7F9)
+PPI: (O43293,A8MU64)
+
+ppiGraph[1]:
+protein: O18683
+protein: O61443
+protein: O62602
+protein: Q7KTP1
+PPI: (O62602,O61443)
+PPI: (O61443,Q7KTP1)
+PPI: (O18683,Q7KTP1)
+
+Alignment Edges:
+aligned: (O43293,O62602,2.0E-9)
+aligned: (A8MU64,O62602,3.0E-12)
+aligned: (O43293,O61443,9.0E-20)
+aligned: (A8MU64,O61443,3.0E-14)
+aligned: (B7Z7F9,O18683,0.0050)
+aligned: (A8MU64,Q7KTP1,2.0E-5)
+
+
+Conserved Module 4
+
+ppiGraph[0]:
+protein: Q7KZI7
+protein: Q99759
+protein: Q9H1R3
+PPI: (Q9H1R3,Q99759)
+PPI: (Q7KZI7,Q99759)
+
+ppiGraph[1]:
+protein: P40417
+protein: Q8T9L5
+protein: Q9VE37
+PPI: (P40417,Q8T9L5)
+PPI: (P40417,Q9VE37)
+
+Alignment Edges:
+aligned: (Q9H1R3,P40417,9.0E-13)
+aligned: (Q7KZI7,P40417,3.0E-17)
+aligned: (Q99759,P40417,4.0E-19)
+aligned: (Q9H1R3,Q9VE37,4.0E-21)
+aligned: (Q7KZI7,Q9VE37,8.0E-23)
+aligned: (Q99759,Q9VE37,1.0E-49)
+aligned: (Q9H1R3,Q8T9L5,1.0E-25)
+aligned: (Q7KZI7,Q8T9L5,3.0E-41)
+aligned: (Q99759,Q8T9L5,6.0E-17)
+
+
+Conserved Module 5
+
+ppiGraph[0]:
+protein: Q7KZI7
+protein: Q99759
+protein: Q9H1R3
+PPI: (Q9H1R3,Q99759)
+PPI: (Q7KZI7,Q99759)
+
+ppiGraph[1]:
+protein: O61443
+protein: O62602
+protein: Q7KTP1
+PPI: (O61443,O62602)
+PPI: (O61443,Q7KTP1)
+
+Alignment Edges:
+aligned: (Q9H1R3,O61443,5.0E-18)
+aligned: (Q7KZI7,O61443,5.0E-17)
+aligned: (Q99759,O61443,3.0E-15)
+aligned: (Q9H1R3,O62602,8.0E-12)
+aligned: (Q7KZI7,O62602,3.0E-16)
+aligned: (Q99759,O62602,8.0E-19)
+aligned: (Q7KZI7,Q7KTP1,4.0E-8)
+aligned: (Q99759,Q7KTP1,5.0E-6)
+
+
+Conserved Module 6
+
+ppiGraph[0]:
+protein: Q7KZI7
+protein: Q99759
+protein: Q9H1R3
+PPI: (Q9H1R3,Q99759)
+PPI: (Q7KZI7,Q99759)
+
+ppiGraph[1]:
+protein: Q8INB9
+protein: Q9VR61
+protein: Q9W0V1
+PPI: (Q9W0V1,Q8INB9)
+PPI: (Q9W0V1,Q9VR61)
+
+Alignment Edges:
+aligned: (Q9H1R3,Q9W0V1,1.0E-4)
+aligned: (Q7KZI7,Q9W0V1,3.0E-8)
+aligned: (Q99759,Q9W0V1,2.0E-5)
+aligned: (Q9H1R3,Q9VR61,1.0E-27)
+aligned: (Q7KZI7,Q9VR61,2.0E-37)
+aligned: (Q99759,Q9VR61,9.0E-17)
+aligned: (Q9H1R3,Q8INB9,8.0E-26)
+aligned: (Q7KZI7,Q8INB9,1.0E-37)
+aligned: (Q99759,Q8INB9,3.0E-20)
+
+
+Conserved Module 7
+
+ppiGraph[0]:
+protein: O14544
+protein: O35607
+protein: P36897
+protein: Q64729
+protein: Q8C0N6
+protein: Q8C6C1
+protein: Q9Z2R9
+PPI: (P36897,O35607)
+PPI: (P36897,Q8C6C1)
+PPI: (P36897,Q8C0N6)
+PPI: (P36897,Q9Z2R9)
+PPI: (P36897,Q64729)
+PPI: (P36897,O14544)
+
+ppiGraph[1]:
+protein: O18683
+protein: O61443
+protein: O62602
+protein: Q7KTP1
+PPI: (O62602,O61443)
+PPI: (Q7KTP1,O18683)
+PPI: (Q7KTP1,O61443)
+
+Alignment Edges:
+aligned: (P36897,O62602,4.0E-9)
+aligned: (Q8C6C1,O62602,3.0E-14)
+aligned: (Q64729,O62602,4.0E-9)
+aligned: (Q9Z2R9,O62602,4.0E-9)
+aligned: (P36897,Q7KTP1,5.0E-112)
+aligned: (Q8C6C1,Q7KTP1,1.0E-11)
+aligned: (O35607,Q7KTP1,3.0E-50)
+aligned: (Q64729,Q7KTP1,1.0E-113)
+aligned: (Q9Z2R9,Q7KTP1,8.0E-6)
+aligned: (Q8C6C1,O61443,2.0E-16)
+aligned: (Q8C0N6,O61443,4.0E-12)
+aligned: (O14544,O18683,0.82)
+
+
+Conserved Module 8
+
+ppiGraph[0]:
+protein: O00238
+protein: P18075
+protein: P27037
+protein: P36894
+protein: P43026
+protein: Q13705
+PPI: (O00238,P27037)
+PPI: (P36894,P18075)
+PPI: (P18075,P27037)
+PPI: (P18075,Q13705)
+PPI: (Q13705,P43026)
+
+ppiGraph[1]:
+protein: O61443
+protein: O62602
+protein: P54631
+protein: Q7KTP1
+protein: Q95U21
+PPI: (Q7KTP1,P54631)
+PPI: (Q7KTP1,O61443)
+PPI: (Q95U21,P54631)
+PPI: (O62602,O61443)
+
+Alignment Edges:
+aligned: (O00238,Q7KTP1,3.0E-132)
+aligned: (P36894,Q7KTP1,7.0E-130)
+aligned: (Q13705,Q7KTP1,8.0E-54)
+aligned: (P27037,Q7KTP1,8.0E-56)
+aligned: (O00238,Q95U21,1.0E-109)
+aligned: (P36894,Q95U21,3.0E-108)
+aligned: (Q13705,Q95U21,4.0E-54)
+aligned: (P27037,Q95U21,4.0E-56)
+aligned: (P36894,O62602,5.0E-9)
+aligned: (P36894,O61443,2.0E-11)
+aligned: (P18075,P54631,3.0E-41)
+aligned: (P43026,P54631,4.0E-19)
+
+
+Conserved Module 9
+
+ppiGraph[0]:
+protein: O14830
+protein: O43318
+protein: P62158
+PPI: (P62158,O43318)
+PPI: (P62158,O14830)
+
+ppiGraph[1]:
+protein: P04412
+protein: P48451
+protein: Q27889
+PPI: (P48451,P04412)
+PPI: (P48451,Q27889)
+
+Alignment Edges:
+aligned: (P62158,P48451,2.0E-15)
+aligned: (O14830,P48451,0.56)
+aligned: (O43318,P04412,1.0E-15)
+aligned: (O14830,Q27889,3.0E-21)
+
+
+Conserved Module 10
+
+ppiGraph[0]:
+protein: P29590-5
+protein: Q05516
+protein: Q5T8Z1
+protein: Q6ICR5
+PPI: (Q6ICR5,Q05516)
+PPI: (P29590-5,Q05516)
+PPI: (Q05516,Q5T8Z1)
+
+ppiGraph[1]:
+protein: P17789
+protein: Q4V5A5
+protein: Q9VIY9
+protein: Q9VR05
+protein: Q9VSB2
+PPI: (Q4V5A5,Q9VR05)
+PPI: (Q9VR05,P17789)
+PPI: (Q9VR05,Q9VIY9)
+PPI: (Q9VR05,Q9VSB2)
+
+Alignment Edges:
+aligned: (Q6ICR5,Q4V5A5,1.0E-4)
+aligned: (Q05516,Q4V5A5,5.0E-17)
+aligned: (Q6ICR5,Q9VR05,9.0E-11)
+aligned: (Q05516,Q9VR05,5.0E-8)
+aligned: (Q6ICR5,Q9VIY9,3.0E-13)
+aligned: (Q05516,Q9VIY9,0.019)
+aligned: (Q6ICR5,P17789,9.5)
+aligned: (Q05516,P17789,0.095)
+aligned: (P29590-5,Q9VSB2,0.027)
+aligned: (Q5T8Z1,Q9VSB2,3.4)
+
+
+Conserved Module 11
+
+ppiGraph[0]:
+protein: Q05516
+protein: Q5T8Z1
+protein: Q6ICR5
+protein: Q96Q04
+PPI: (Q05516,Q5T8Z1)
+PPI: (Q05516,Q96Q04)
+PPI: (Q6ICR5,Q05516)
+
+ppiGraph[1]:
+protein: P19538
+protein: P25172
+protein: Q8SYW8
+PPI: (P19538,P25172)
+PPI: (P19538,Q8SYW8)
+
+Alignment Edges:
+aligned: (Q6ICR5,P19538,4.0E-16)
+aligned: (Q05516,P19538,8.0E-13)
+aligned: (Q5T8Z1,P25172,2.0E-21)
+aligned: (Q96Q04,Q8SYW8,2.0)
+
+
+Conserved Module 12
+
+ppiGraph[0]:
+protein: P49841
+protein: P63085
+protein: Q9NZI8
+PPI: (P49841,Q9NZI8)
+PPI: (P49841,P63085)
+
+ppiGraph[1]:
+protein: P49657
+protein: Q86B73
+protein: Q9W108
+PPI: (P49657,Q86B73)
+PPI: (P49657,Q9W108)
+
+Alignment Edges:
+aligned: (P49841,P49657,2.0E-28)
+aligned: (P63085,P49657,3.0E-22)
+aligned: (P49841,Q86B73,1.0E-19)
+aligned: (P63085,Q86B73,8.0E-15)
+aligned: (Q9NZI8,Q9W108,0.44)
+
+
+Conserved Module 13
+
+ppiGraph[0]:
+protein: P49841
+protein: P63085
+protein: Q9NZI8
+PPI: (P49841,Q9NZI8)
+PPI: (P49841,P63085)
+
+ppiGraph[1]:
+protein: Q8IMS8
+protein: Q9VBQ1
+protein: Q9VMS5
+PPI: (Q9VMS5,Q8IMS8)
+PPI: (Q9VMS5,Q9VBQ1)
+
+Alignment Edges:
+aligned: (P49841,Q9VMS5,0.0040)
+aligned: (P63085,Q9VMS5,3.0E-4)
+aligned: (Q9NZI8,Q8IMS8,7.1)
+aligned: (Q9NZI8,Q9VBQ1,5.5)
+
+
+Conserved Module 14
+
+ppiGraph[0]:
+protein: O35158
+protein: P00519
+protein: P50851
+protein: Q8CBW3
+protein: Q8IZD9
+PPI: (Q8IZD9,P00519)
+PPI: (P00519,O35158)
+PPI: (P00519,P50851)
+PPI: (P00519,Q8CBW3)
+
+ppiGraph[1]:
+protein: Q8IRI7
+protein: Q966U7
+protein: Q9VAE4
+protein: Q9VHC3
+PPI: (Q966U7,Q9VHC3)
+PPI: (Q9VHC3,Q8IRI7)
+PPI: (Q8IRI7,Q9VAE4)
+
+Alignment Edges:
+aligned: (Q8IZD9,Q966U7,0.018)
+aligned: (P00519,Q966U7,2.4)
+aligned: (Q8CBW3,Q966U7,9.0E-9)
+aligned: (P00519,Q9VHC3,0.31)
+aligned: (P50851,Q8IRI7,0.43)
+aligned: (O35158,Q9VAE4,7.5)
+
+
+Conserved Module 15
+
+ppiGraph[0]:
+protein: P00519
+protein: Q9BZM3
+protein: Q9UIF9
+PPI: (P00519,Q9BZM3)
+PPI: (P00519,Q9UIF9)
+
+ppiGraph[1]:
+protein: P07548
+protein: P13709
+protein: Q9VGQ0
+PPI: (Q9VGQ0,P07548)
+PPI: (P13709,P07548)
+
+Alignment Edges:
+aligned: (P00519,Q9VGQ0,1.0E-24)
+aligned: (Q9UIF9,P13709,4.0E-13)
+aligned: (Q9BZM3,P07548,7.0E-18)
+
+
+Conserved Module 16
+
+ppiGraph[0]:
+protein: O14733
+protein: P70218
+protein: Q16584
+PPI: (O14733,Q16584)
+PPI: (P70218,Q16584)
+
+ppiGraph[1]:
+protein: P40417
+protein: Q8T9L5
+protein: Q9VE37
+PPI: (Q9VE37,P40417)
+PPI: (Q8T9L5,P40417)
+
+Alignment Edges:
+aligned: (O14733,Q9VE37,3.0E-24)
+aligned: (P70218,Q9VE37,1.0E-30)
+aligned: (Q16584,Q9VE37,2.0E-17)
+aligned: (O14733,Q8T9L5,4.0E-10)
+aligned: (P70218,Q8T9L5,2.0E-15)
+aligned: (Q16584,Q8T9L5,8.0E-16)
+aligned: (P70218,P40417,4.0E-17)
+aligned: (Q16584,P40417,6.0E-13)
+
+
+Conserved Module 17
+
+ppiGraph[0]:
+protein: O14733
+protein: P70218
+protein: Q16584
+PPI: (O14733,Q16584)
+PPI: (P70218,Q16584)
+
+ppiGraph[1]:
+protein: Q8INB9
+protein: Q9VR61
+protein: Q9W0V1
+PPI: (Q9VR61,Q9W0V1)
+PPI: (Q8INB9,Q9W0V1)
+
+Alignment Edges:
+aligned: (O14733,Q9VR61,1.0E-17)
+aligned: (P70218,Q9VR61,4.0E-19)
+aligned: (Q16584,Q9VR61,9.0E-20)
+aligned: (O14733,Q8INB9,6.0E-13)
+aligned: (P70218,Q8INB9,4.0E-19)
+aligned: (Q16584,Q8INB9,9.0E-18)
+aligned: (P70218,Q9W0V1,2.0E-5)
+
+
+Conserved Module 18
+
+ppiGraph[0]:
+protein: O14733
+protein: P70218
+protein: Q16584
+PPI: (O14733,Q16584)
+PPI: (P70218,Q16584)
+
+ppiGraph[1]:
+protein: O61443
+protein: O62602
+protein: Q7KTP1
+PPI: (O61443,O62602)
+PPI: (O61443,Q7KTP1)
+
+Alignment Edges:
+aligned: (O14733,O61443,5.0E-12)
+aligned: (P70218,O61443,1.0E-17)
+aligned: (Q16584,O61443,5.0E-15)
+aligned: (O14733,O62602,2.0E-72)
+aligned: (P70218,O62602,9.0E-25)
+aligned: (Q16584,O62602,5.0E-10)
+aligned: (O14733,Q7KTP1,2.0E-6)
+aligned: (P70218,Q7KTP1,6.0E-11)
+aligned: (Q16584,Q7KTP1,2.0E-14)
+
+
+Conserved Module 19
+
+ppiGraph[0]:
+protein: O14908
+protein: Q9BYG5
+protein: Q9NPB6
+protein: Q9UJM0
+PPI: (O14908,Q9BYG5)
+PPI: (Q9UJM0,Q9BYG5)
+PPI: (Q9NPB6,Q9BYG5)
+
+ppiGraph[1]:
+protein: O96692
+protein: Q8IPP4
+protein: Q8IRR2
+protein: Q8SX30
+protein: Q9VMF3
+PPI: (Q8IPP4,O96692)
+PPI: (Q8SX30,O96692)
+PPI: (O96692,Q9VMF3)
+PPI: (O96692,Q8IRR2)
+
+Alignment Edges:
+aligned: (O14908,Q8IPP4,4.6)
+aligned: (Q9NPB6,Q8IPP4,0.011)
+aligned: (Q9BYG5,Q8IPP4,0.01)
+aligned: (O14908,Q8SX30,6.9)
+aligned: (Q9NPB6,Q8SX30,4.4)
+aligned: (Q9BYG5,Q8SX30,0.99)
+aligned: (Q9UJM0,O96692,4.0E-5)
+aligned: (Q9NPB6,Q8IRR2,5.3)
+aligned: (Q9BYG5,Q9VMF3,0.026)
+
+
+Conserved Module 20
+
+ppiGraph[0]:
+protein: O14908
+protein: Q05513
+protein: Q9BYG5
+protein: Q9NPB6
+PPI: (Q05513,Q9BYG5)
+PPI: (O14908,Q9BYG5)
+PPI: (Q9NPB6,Q9BYG5)
+
+ppiGraph[1]:
+protein: P04412-2
+protein: Q8T5S9
+protein: Q9VBY7
+PPI: (Q9VBY7,Q8T5S9)
+PPI: (Q9VBY7,P04412-2)
+
+Alignment Edges:
+aligned: (O14908,Q9VBY7,0.067)
+aligned: (Q9NPB6,Q9VBY7,8.0E-4)
+aligned: (Q9BYG5,Q9VBY7,9.0E-6)
+aligned: (O14908,Q8T5S9,1.2)
+aligned: (Q9NPB6,Q8T5S9,2.0E-5)
+aligned: (Q9BYG5,Q8T5S9,7.0E-5)
+aligned: (Q05513,P04412-2,1.0E-9)
+
+
+Conserved Module 21
+
+ppiGraph[0]:
+protein: O14936-2
+protein: P49674
+protein: P78396
+protein: Q9BZL6
+PPI: (P49674,Q9BZL6)
+PPI: (P78396,P49674)
+PPI: (O14936-2,Q9BZL6)
+
+ppiGraph[1]:
+protein: A1Z9G1
+protein: P49657
+protein: Q86B73
+PPI: (Q86B73,A1Z9G1)
+PPI: (Q86B73,P49657)
+
+Alignment Edges:
+aligned: (O14936-2,Q86B73,4.0E-13)
+aligned: (P49674,Q86B73,8.0E-4)
+aligned: (Q9BZL6,Q86B73,6.0E-11)
+aligned: (O14936-2,P49657,2.0E-11)
+aligned: (P49674,P49657,1.0E-9)
+aligned: (Q9BZL6,P49657,2.0E-15)
+aligned: (P78396,A1Z9G1,0.44)
+
+
+Conserved Module 22
+
+ppiGraph[0]:
+protein: O14936-2
+protein: P49674
+protein: Q9BZL6
+PPI: (P49674,Q9BZL6)
+PPI: (O14936-2,Q9BZL6)
+
+ppiGraph[1]:
+protein: Q8INB9
+protein: Q9VR61
+protein: Q9W0V1
+PPI: (Q9VR61,Q9W0V1)
+PPI: (Q9W0V1,Q8INB9)
+
+Alignment Edges:
+aligned: (O14936-2,Q9VR61,5.0E-24)
+aligned: (Q9BZL6,Q9VR61,3.0E-28)
+aligned: (O14936-2,Q9W0V1,1.0E-7)
+aligned: (P49674,Q9W0V1,7.0E-8)
+aligned: (Q9BZL6,Q9W0V1,6.0E-7)
+aligned: (O14936-2,Q8INB9,2.0E-23)
+aligned: (Q9BZL6,Q8INB9,3.0E-22)
+
+
+Conserved Module 23
+
+ppiGraph[0]:
+protein: O14978
+protein: O95967
+protein: Q14966
+PPI: (O14978,O95967)
+PPI: (Q14966,O95967)
+
+ppiGraph[1]:
+protein: P19538
+protein: P24014-3
+protein: Q8T015
+PPI: (P19538,P24014-3)
+PPI: (P19538,Q8T015)
+
+Alignment Edges:
+aligned: (O14978,P19538,2.0E-16)
+aligned: (Q14966,Q8T015,2.8)
+aligned: (O95967,P24014-3,5.0E-5)
+
+
+Conserved Module 24
+
+ppiGraph[0]:
+protein: P00540
+protein: P06241
+protein: P06493
+protein: P23759
+protein: Q9ULD4
+PPI: (P06241,P00540)
+PPI: (Q9ULD4,P06241)
+PPI: (P23759,P06241)
+PPI: (P06493,P06241)
+
+ppiGraph[1]:
+protein: P07548
+protein: P13709
+protein: Q9VGQ0
+PPI: (P07548,Q9VGQ0)
+PPI: (P07548,P13709)
+
+Alignment Edges:
+aligned: (P23759,P07548,2.0E-8)
+aligned: (Q9ULD4,P13709,3.0E-8)
+aligned: (P06493,Q9VGQ0,4.0E-23)
+aligned: (P06241,Q9VGQ0,3.0E-21)
+aligned: (P00540,Q9VGQ0,8.0E-16)
+
+
+Conserved Module 25
+
+ppiGraph[0]:
+protein: P06241
+protein: P06493
+protein: P23759
+PPI: (P23759,P06241)
+PPI: (P06493,P06241)
+
+ppiGraph[1]:
+protein: P05812
+protein: Q03043
+protein: Q7PLI6
+PPI: (P05812,Q7PLI6)
+PPI: (P05812,Q03043)
+
+Alignment Edges:
+aligned: (P23759,P05812,6.4)
+aligned: (P06493,Q7PLI6,8.0E-21)
+aligned: (P06241,Q7PLI6,6.0E-17)
+aligned: (P06493,Q03043,1.0E-14)
+aligned: (P06241,Q03043,6.0E-13)
+
+
+Conserved Module 26
+
+ppiGraph[0]:
+protein: P06241
+protein: P06493
+protein: Q9UMN6
+PPI: (Q9UMN6,P06241)
+PPI: (P06493,P06241)
+
+ppiGraph[1]:
+protein: P91634
+protein: Q8INB9
+protein: Q9VR61
+protein: Q9W0V1
+PPI: (P91634,Q8INB9)
+PPI: (Q9W0V1,Q8INB9)
+PPI: (Q9W0V1,Q9VR61)
+
+Alignment Edges:
+aligned: (Q9UMN6,P91634,0.29)
+aligned: (P06493,Q9W0V1,3.0E-9)
+aligned: (P06241,Q9W0V1,6.0E-5)
+aligned: (P06493,Q8INB9,2.0E-13)
+aligned: (P06241,Q8INB9,1.0E-9)
+aligned: (P06493,Q9VR61,5.0E-18)
+aligned: (P06241,Q9VR61,6.0E-9)
+
+
+Conserved Module 27
+
+ppiGraph[0]:
+protein: P00540
+protein: P06241
+protein: P06493
+PPI: (P06241,P00540)
+PPI: (P06493,P06241)
+
+ppiGraph[1]:
+protein: O18683
+protein: O61443
+protein: O62602
+protein: Q7KTP1
+PPI: (O62602,O61443)
+PPI: (O61443,Q7KTP1)
+PPI: (Q7KTP1,O18683)
+
+Alignment Edges:
+aligned: (P06493,O62602,1.0E-14)
+aligned: (P06241,O62602,1.0E-11)
+aligned: (P00540,O62602,2.0E-9)
+aligned: (P06493,O61443,3.0E-43)
+aligned: (P06241,O61443,6.0E-17)
+aligned: (P06493,Q7KTP1,1.0E-4)
+aligned: (P06241,Q7KTP1,3.0E-15)
+aligned: (P00540,Q7KTP1,6.0E-16)
+aligned: (P06241,O18683,0.0080)
+
+
+Conserved Module 28
+
+ppiGraph[0]:
+protein: P00540
+protein: P06241
+protein: P06493
+PPI: (P06241,P00540)
+PPI: (P06493,P06241)
+
+ppiGraph[1]:
+protein: P40417
+protein: Q8T9L5
+protein: Q9VE37
+PPI: (Q8T9L5,P40417)
+PPI: (P40417,Q9VE37)
+
+Alignment Edges:
+aligned: (P06493,Q8T9L5,6.0E-24)
+aligned: (P06241,Q8T9L5,5.0E-14)
+aligned: (P00540,Q8T9L5,2.0E-12)
+aligned: (P06493,P40417,1.0E-48)
+aligned: (P06241,P40417,2.0E-14)
+aligned: (P06493,Q9VE37,5.0E-21)
+aligned: (P06241,Q9VE37,7.0E-17)
+
+
+Conserved Module 29
+
+ppiGraph[0]:
+protein: P00540
+protein: P06241
+protein: P06493
+PPI: (P06241,P00540)
+PPI: (P06493,P06241)
+
+ppiGraph[1]:
+protein: P00528
+protein: Q29QP1
+protein: Q9VRS2
+PPI: (P00528,Q29QP1)
+PPI: (P00528,Q9VRS2)
+
+Alignment Edges:
+aligned: (P06493,P00528,1.0E-18)
+aligned: (P06241,P00528,2.0E-147)
+aligned: (P00540,P00528,5.0E-17)
+aligned: (P06241,Q29QP1,0.0040)
+aligned: (P06241,Q9VRS2,1.0E-5)
+
+
+Conserved Module 30
+
+ppiGraph[0]:
+protein: P07333
+protein: P27986
+protein: P35590
+protein: Q04912
+protein: Q8WV28
+PPI: (P07333,P27986)
+PPI: (P35590,P27986)
+PPI: (Q8WV28,P27986)
+PPI: (P27986,Q04912)
+
+ppiGraph[1]:
+protein: P00528
+protein: Q29QP1
+protein: Q9VRS2
+PPI: (P00528,Q29QP1)
+PPI: (P00528,Q9VRS2)
+
+Alignment Edges:
+aligned: (P07333,P00528,2.0E-39)
+aligned: (P35590,P00528,2.0E-44)
+aligned: (Q04912,P00528,5.0E-48)
+aligned: (Q8WV28,Q9VRS2,2.5)
+aligned: (P27986,Q9VRS2,4.0E-5)
+aligned: (P27986,Q29QP1,8.0E-4)
+
+
+Conserved Module 31
+
+ppiGraph[0]:
+protein: P07333
+protein: P27986
+protein: P35590
+protein: Q04912
+protein: Q8WV28
+PPI: (P07333,P27986)
+PPI: (P35590,P27986)
+PPI: (Q8WV28,P27986)
+PPI: (P27986,Q04912)
+
+ppiGraph[1]:
+protein: O18683
+protein: O61443
+protein: Q7KTP1
+PPI: (Q7KTP1,O18683)
+PPI: (Q7KTP1,O61443)
+
+Alignment Edges:
+aligned: (P07333,Q7KTP1,6.0E-5)
+aligned: (P35590,Q7KTP1,2.0E-9)
+aligned: (Q04912,Q7KTP1,2.0E-13)
+aligned: (P35590,O61443,6.0E-11)
+aligned: (Q04912,O61443,6.0E-12)
+aligned: (Q8WV28,O18683,0.016)
+aligned: (P27986,O18683,5.0E-7)
+
+
+Conserved Module 32
+
+ppiGraph[0]:
+protein: O43395
+protein: P07101
+protein: Q9UHX1
+PPI: (O43395,Q9UHX1)
+PPI: (O43395,P07101)
+
+ppiGraph[1]:
+protein: P18459
+protein: Q86BN2
+protein: Q8MRG6
+protein: Q9VW52
+protein: Q9W1T4
+PPI: (Q8MRG6,P18459)
+PPI: (Q8MRG6,Q9W1T4)
+PPI: (Q9VW52,Q86BN2)
+PPI: (Q9VW52,P18459)
+
+Alignment Edges:
+aligned: (O43395,Q8MRG6,8.0E-140)
+aligned: (O43395,Q9VW52,2.0E-142)
+aligned: (P07101,P18459,5.0E-135)
+aligned: (Q9UHX1,Q9W1T4,2.0E-11)
+aligned: (Q9UHX1,Q86BN2,5.0)
+
+
+Conserved Module 33
+
+ppiGraph[0]:
+protein: P55211
+protein: P98170
+protein: Q07817
+protein: Q14790
+protein: Q9UKT9
+PPI: (Q14790,Q07817)
+PPI: (Q9UKT9,Q07817)
+PPI: (Q07817,P55211)
+PPI: (P98170,P55211)
+
+ppiGraph[1]:
+protein: O01382
+protein: Q24306
+protein: Q8T8Y5
+protein: Q9V9C8
+protein: Q9W4F9
+PPI: (O01382,Q24306)
+PPI: (Q9W4F9,Q24306)
+PPI: (Q8T8Y5,Q24306)
+PPI: (Q8T8Y5,Q9V9C8)
+
+Alignment Edges:
+aligned: (Q14790,O01382,3.0E-38)
+aligned: (P55211,O01382,2.0E-29)
+aligned: (Q9UKT9,Q9W4F9,3.0E-5)
+aligned: (Q07817,Q8T8Y5,7.0E-11)
+aligned: (Q07817,Q9V9C8,1.0E-8)
+aligned: (P98170,Q24306,3.0E-24)
+
+
+Conserved Module 34
+
+ppiGraph[0]:
+protein: O43915
+protein: P49767
+protein: Q86W08
+PPI: (O43915,Q86W08)
+PPI: (P49767,Q86W08)
+
+ppiGraph[1]:
+protein: Q9VLQ8
+protein: Q9VM39
+protein: Q9VM43
+protein: Q9VWP6
+PPI: (Q9VWP6,Q9VLQ8)
+PPI: (Q9VWP6,Q9VM43)
+PPI: (Q9VM39,Q9VM43)
+
+Alignment Edges:
+aligned: (O43915,Q9VWP6,8.0E-5)
+aligned: (P49767,Q9VWP6,2.0E-7)
+aligned: (O43915,Q9VM39,1.0)
+aligned: (P49767,Q9VM39,4.2)
+aligned: (O43915,Q9VM43,0.6)
+aligned: (P49767,Q9VM43,4.0E-4)
+aligned: (Q86W08,Q9VLQ8,9.0E-43)
+
+
+Conserved Module 35
+
+ppiGraph[0]:
+protein: P11362-7
+protein: P35968
+protein: Q15464
+PPI: (Q15464,P11362-7)
+PPI: (Q15464,P35968)
+
+ppiGraph[1]:
+protein: P00528
+protein: Q29QP1
+protein: Q9VRS2
+PPI: (Q9VRS2,P00528)
+PPI: (Q29QP1,P00528)
+
+Alignment Edges:
+aligned: (Q15464,Q9VRS2,0.77)
+aligned: (Q15464,Q29QP1,0.54)
+aligned: (P35968,P00528,5.0E-39)
+aligned: (P11362-7,P00528,3.0E-52)
+
+
+Conserved Module 36
+
+ppiGraph[0]:
+protein: P49023
+protein: P50454
+protein: Q13418
+protein: Q15654
+PPI: (Q15654,P49023)
+PPI: (P50454,P49023)
+PPI: (P49023,Q13418)
+
+ppiGraph[1]:
+protein: A1Z6W3
+protein: P07207
+protein: Q8IP36
+PPI: (A1Z6W3,P07207)
+PPI: (Q8IP36,P07207)
+
+Alignment Edges:
+aligned: (Q15654,A1Z6W3,1.0E-11)
+aligned: (P49023,A1Z6W3,3.0E-9)
+aligned: (P50454,Q8IP36,0.2)
+aligned: (Q13418,P07207,0.01)
+
+
+Conserved Module 37
+
+ppiGraph[0]:
+protein: P00533
+protein: Q15303
+protein: Q92918
+PPI: (Q92918,P00533)
+PPI: (Q15303,P00533)
+
+ppiGraph[1]:
+protein: Q8INB9
+protein: Q9VR61
+protein: Q9W0V1
+PPI: (Q9VR61,Q9W0V1)
+PPI: (Q9W0V1,Q8INB9)
+
+Alignment Edges:
+aligned: (Q92918,Q9VR61,1.0E-14)
+aligned: (Q15303,Q9VR61,3.0E-14)
+aligned: (P00533,Q9VR61,2.0E-14)
+aligned: (Q92918,Q9W0V1,4.0)
+aligned: (P00533,Q9W0V1,2.0E-4)
+aligned: (Q92918,Q8INB9,5.0E-20)
+aligned: (Q15303,Q8INB9,5.0E-8)
+
+
+Conserved Module 38
+
+ppiGraph[0]:
+protein: P00533
+protein: P98083
+protein: Q13322
+protein: Q15303
+protein: Q5T7I8
+protein: Q8WYP3
+protein: Q92918
+protein: Q96D37
+protein: Q9XYM0
+PPI: (Q15303,P00533)
+PPI: (Q96D37,P00533)
+PPI: (Q5T7I8,P00533)
+PPI: (Q9XYM0,P00533)
+PPI: (Q13322,P00533)
+PPI: (P00533,P98083)
+PPI: (P00533,Q8WYP3)
+PPI: (Q92918,P00533)
+
+ppiGraph[1]:
+protein: O18683
+protein: O61443
+protein: O62602
+protein: Q7KTP1
+PPI: (O62602,O61443)
+PPI: (Q7KTP1,O18683)
+PPI: (Q7KTP1,O61443)
+
+Alignment Edges:
+aligned: (Q92918,O62602,4.0E-26)
+aligned: (Q15303,O62602,2.0E-9)
+aligned: (P00533,O62602,2.0E-8)
+aligned: (Q92918,Q7KTP1,2.0E-10)
+aligned: (Q15303,Q7KTP1,4.0E-9)
+aligned: (P00533,Q7KTP1,4.0E-8)
+aligned: (Q92918,O61443,6.0E-18)
+aligned: (Q96D37,O18683,2.0E-10)
+aligned: (Q5T7I8,O18683,8.0E-5)
+aligned: (Q9XYM0,O18683,0.0010)
+aligned: (Q13322,O18683,1.0E-5)
+aligned: (P98083,O18683,3.0E-9)
+aligned: (Q8WYP3,O18683,4.1)
+
+
+Conserved Module 39
+
+ppiGraph[0]:
+protein: P00533
+protein: P98083
+protein: Q13322
+protein: Q15303
+protein: Q5T7I8
+protein: Q8WYP3
+protein: Q92918
+protein: Q96D37
+protein: Q9XYM0
+PPI: (Q15303,P00533)
+PPI: (Q96D37,P00533)
+PPI: (Q5T7I8,P00533)
+PPI: (Q9XYM0,P00533)
+PPI: (Q13322,P00533)
+PPI: (P00533,P98083)
+PPI: (P00533,Q8WYP3)
+PPI: (Q92918,P00533)
+
+ppiGraph[1]:
+protein: P00528
+protein: Q29QP1
+protein: Q9VRS2
+PPI: (P00528,Q29QP1)
+PPI: (P00528,Q9VRS2)
+
+Alignment Edges:
+aligned: (Q92918,P00528,2.0E-17)
+aligned: (Q15303,P00528,1.0E-45)
+aligned: (P00533,P00528,1.0E-41)
+aligned: (Q96D37,Q29QP1,0.035)
+aligned: (Q5T7I8,Q29QP1,0.0080)
+aligned: (Q9XYM0,Q29QP1,0.014)
+aligned: (P98083,Q29QP1,0.0020)
+aligned: (Q8WYP3,Q29QP1,0.036)
+aligned: (Q96D37,Q9VRS2,1.2)
+aligned: (Q5T7I8,Q9VRS2,8.0E-4)
+aligned: (Q9XYM0,Q9VRS2,2.0E-4)
+aligned: (Q13322,Q9VRS2,0.087)
+aligned: (P98083,Q9VRS2,5.0E-4)
+aligned: (Q8WYP3,Q9VRS2,2.0E-9)
+
+
+Conserved Module 40
+
+ppiGraph[0]:
+protein: Q96EQ8
+protein: Q96P09
+protein: Q9NVW2
+protein: Q9Y2X8
+PPI: (Q96EQ8,Q9Y2X8)
+PPI: (Q9Y2X8,Q96P09)
+PPI: (Q9Y2X8,Q9NVW2)
+
+ppiGraph[1]:
+protein: A1Z9I6
+protein: P25867
+protein: Q8I0J6
+protein: Q9VXP1
+PPI: (Q9VXP1,P25867)
+PPI: (Q8I0J6,P25867)
+PPI: (P25867,A1Z9I6)
+
+Alignment Edges:
+aligned: (Q96EQ8,Q9VXP1,0.0030)
+aligned: (Q96P09,Q9VXP1,1.2)
+aligned: (Q96EQ8,Q8I0J6,2.0E-5)
+aligned: (Q9NVW2,Q8I0J6,1.9)
+aligned: (Q9Y2X8,P25867,7.0E-79)
+aligned: (Q9NVW2,A1Z9I6,0.049)
+
+
+Conserved Module 41
+
+ppiGraph[0]:
+protein: O95166
+protein: Q86TL0
+protein: Q9NP61
+PPI: (O95166,Q86TL0)
+PPI: (O95166,Q9NP61)
+
+ppiGraph[1]:
+protein: Q9VNS2
+protein: Q9VPW2
+protein: Q9W2S2
+PPI: (Q9W2S2,Q9VPW2)
+PPI: (Q9W2S2,Q9VNS2)
+
+Alignment Edges:
+aligned: (O95166,Q9W2S2,8.0E-60)
+aligned: (Q86TL0,Q9VPW2,2.0E-45)
+aligned: (Q9NP61,Q9VNS2,4.0E-69)
+
+
+Conserved Module 42
+
+ppiGraph[0]:
+protein: O96004
+protein: Q59FI5
+protein: Q5TF93
+protein: Q99081
+PPI: (O96004,Q59FI5)
+PPI: (O96004,Q5TF93)
+PPI: (O96004,Q99081)
+
+ppiGraph[1]:
+protein: P09775
+protein: P10084
+protein: Q01068
+protein: Q01069
+protein: Q01070
+protein: Q26263
+protein: Q86PA6
+protein: Q8T030
+PPI: (P10084,Q01068)
+PPI: (P10084,Q26263)
+PPI: (P10084,Q86PA6)
+PPI: (P09775,Q01069)
+PPI: (Q8T030,Q01069)
+PPI: (Q01068,Q01069)
+PPI: (Q01070,Q01069)
+
+Alignment Edges:
+aligned: (O96004,P10084,5.0E-4)
+aligned: (Q5TF93,P10084,0.062)
+aligned: (O96004,P09775,0.13)
+aligned: (Q59FI5,Q8T030,6.0E-10)
+aligned: (Q5TF93,Q01068,7.0E-9)
+aligned: (Q5TF93,Q26263,2.0E-18)
+aligned: (Q5TF93,Q01070,9.0E-10)
+aligned: (Q5TF93,Q01069,3.0E-9)
+aligned: (Q99081,Q86PA6,5.0E-36)
+
+
+Conserved Module 43
+
+ppiGraph[0]:
+protein: P01112
+protein: Q13009
+protein: Q9NS23
+PPI: (P01112,Q9NS23)
+PPI: (P01112,Q13009)
+
+ppiGraph[1]:
+protein: O96692
+protein: Q8IPP4
+protein: Q8IRR2
+protein: Q9VMF3
+PPI: (O96692,Q9VMF3)
+PPI: (O96692,Q8IPP4)
+PPI: (O96692,Q8IRR2)
+
+Alignment Edges:
+aligned: (P01112,O96692,4.0E-35)
+aligned: (Q9NS23,Q8IPP4,9.3)
+aligned: (Q9NS23,Q9VMF3,4.7)
+aligned: (Q13009,Q9VMF3,5.5)
+aligned: (Q13009,Q8IRR2,8.0E-4)
+
+
+Conserved Module 44
+
+ppiGraph[0]:
+protein: P01112
+protein: P10398
+protein: Q13009
+PPI: (P01112,Q13009)
+PPI: (P01112,P10398)
+
+ppiGraph[1]:
+protein: P40792
+protein: Q7K4E0
+protein: Q9W002
+PPI: (P40792,Q9W002)
+PPI: (P40792,Q7K4E0)
+
+Alignment Edges:
+aligned: (P01112,P40792,8.0E-15)
+aligned: (P10398,Q9W002,9.0E-14)
+aligned: (Q13009,Q7K4E0,2.0E-9)
+
+
