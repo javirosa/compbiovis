@@ -1,6 +1,7 @@
 package vieprot.browser.list;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -18,6 +19,7 @@ public class SortableModuleListModel extends AbstractListModel {
 	private static NumberOfNodesComparator numberOfNodesComparator = new NumberOfNodesComparator(false);
 	private static IDComparator idComparator = new IDComparator();
 	private static NumberOfAlignedEdgesComparator aec = new NumberOfAlignedEdgesComparator(false);
+	private static AlignedEdgeDegreeComparator aedc = new AlignedEdgeDegreeComparator(true);
 	
 	public void addElement(Graph g) {
 		GraphWithMetadata gmd = new GraphWithMetadata(g);
@@ -30,29 +32,21 @@ public class SortableModuleListModel extends AbstractListModel {
 	}
 	
 	public void sort(String option) {
+		Comparator<GraphWithMetadata> c;
+		
 		if(option == InterfaceConstants.SORT_OPTIONS_ID)
-			sortByID();
+			c = idComparator;
 		else if(option == InterfaceConstants.SORT_OPTIONS_NUM_NODES)
-			sortByNumberOfNodes();
+			c = numberOfNodesComparator;
 		else if(option == InterfaceConstants.SORT_OPTIONS_ALIGNED_EDGES)
-			sortByAlignedEdges();
-	}
-	
-	public void sortByNumberOfNodes() {
-		Collections.sort(data, numberOfNodesComparator);
+			c = aec;
+		else
+			c = aedc;
+		
+		Collections.sort(data, c);
 		this.fireContentsChanged(this, 0, data.size()-1);
 	}
 
-	public void sortByID() {
-		Collections.sort(data, idComparator);
-		this.fireContentsChanged(this, 0, data.size()-1);
-	}
-	
-	public void sortByAlignedEdges() {
-		Collections.sort(data, aec);
-		this.fireContentsChanged(this, 0, data.size()-1);
-	}
-	
 	@Override
 	public Object getElementAt(int index) {
 		return (GraphWithMetadata)data.get(index);

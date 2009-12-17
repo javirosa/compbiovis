@@ -7,7 +7,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.JComboBox;
@@ -16,6 +20,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -23,10 +28,13 @@ import javax.swing.event.ListSelectionListener;
 
 import prefuse.data.Graph;
 import prefuse.data.io.GraphCollection;
+import prefuse.visual.EdgeItem;
+import prefuse.visual.NodeItem;
 
 import vieprot.browser.list.*;
 import vieprot.browser.table.GOAnnotationTableModel;
 import vieprot.viewer.ModuleViewer;
+import vieprot.lib.Constants;
 import vieprot.lib.InterfaceConstants;
 import vieprot.structures.*;
 
@@ -34,7 +42,9 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 
 	private GraphCollection modules;
 	private ModuleViewer view;
-	
+    protected JTextArea moduleInfo;
+	protected JList modulesList;
+    
 	private SortableModuleListModel graphIDs = new SortableModuleListModel();
 	
 	public ModuleBrowser(GraphCollection gc, ModuleViewer v) {
@@ -45,7 +55,7 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 		JLabel sortLabel = new JLabel("Sort on:", JLabel.RIGHT);
 		
 		String[] sortOptions = {InterfaceConstants.SORT_OPTIONS_ID, InterfaceConstants.SORT_OPTIONS_NUM_NODES, 
-								InterfaceConstants.SORT_OPTIONS_ALIGNED_EDGES, "Avg. degree of node"};
+								InterfaceConstants.SORT_OPTIONS_ALIGNED_EDGES, InterfaceConstants.SORT_OPTIONS_ALIGNED_DEGREE};
 		JComboBox sortBox = new JComboBox(sortOptions);
 		sortBox.setSelectedItem("id");
 		sortBox.addActionListener(this);
@@ -61,18 +71,28 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
         	graphIDs.addElement(modules.getID(i));
         }
         */
-        JList modules = new JList(graphIDs);
-        modules.setSelectionBackground(new Color(0,0,255));
-        modules.setSelectionForeground(new Color(0,0,0));
+        modulesList = new JList(graphIDs);
+        modulesList.setSelectionBackground(new Color(0,0,255));
+        modulesList.setSelectionForeground(new Color(0,0,0));
         ModuleListItemRenderer renderer= new ModuleListItemRenderer();
-        modules.setCellRenderer(renderer);
+        modulesList.setCellRenderer(renderer);
         
-        modules.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        modules.setSelectedIndex(0);
-        modules.addListSelectionListener(this);      
-        JScrollPane moduleScrollPanel = new JScrollPane(modules);
+        modulesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        modulesList.setSelectedIndex(0);
+        modulesList.addListSelectionListener(this);      
+        JScrollPane moduleScrollPanel = new JScrollPane(modulesList);
         //moduleScrollPanel.setPreferredSize(new Dimension(100,900));
         //moduleScrollPanel.setPreferredSize(this.getSize());
+        
+        // Set up node info box
+        moduleInfo = new JTextArea(4,20);
+        moduleInfo.setEditable(false);
+        Box moduleInfoBox = new Box(BoxLayout.Y_AXIS);
+        moduleInfoBox.setVisible(true);
+        moduleInfoBox.add(moduleInfo);
+        moduleInfoBox.setBorder(BorderFactory.createTitledBorder("Module information"));
+        moduleInfoBox.setPreferredSize(moduleInfo.getPreferredSize());
+        initModuleInfoBox();
         
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -84,6 +104,7 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
         				.addComponent(sortLabel)
         				.addComponent(sortBox))
         		.addComponent(moduleScrollPanel)
+        		.addComponent(moduleInfoBox)
         	);
         
         layout.setVerticalGroup(layout.createSequentialGroup()
@@ -91,6 +112,7 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
         				.addComponent(sortLabel)
         				.addComponent(sortBox))
         		.addComponent(moduleScrollPanel)
+        		.addComponent(moduleInfoBox)
         	);
 	}
 
@@ -99,15 +121,26 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
     	System.out.println(g.getEdgeTable().getSchema().toString());
     	System.out.format("# nodes: %d | # edges: %d\n", g.getNodeCount(), g.getEdgeCount());
     }
+    
+    public void initModuleInfoBox() {
+    	initModuleInfoBox((GraphWithMetadata)modulesList.getSelectedValue());
+    }
+    public void initModuleInfoBox(GraphWithMetadata graph) {
+    	String info = String.format("# m0 modules:\t\t%d\n# m1 modules:\t\t%d\n# aligned edges:\t%d\nAverage aligned edge degree:\t%.3f",
+    			graph.getNumberOfM0Nodes(), graph.getNumberOfM1Nodes(), graph.getNumberOfAlignedEdges(), graph.getAverageAlignedEdgeDegree());
+    	moduleInfo.setText(info);
+    }
 	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if(!e.getValueIsAdjusting()) {
 			JList dlm = (JList)e.getSource();
-			String selectedGraphID = ((GraphWithMetadata)dlm.getSelectedValue()).getID();
+			GraphWithMetadata selectedGraph = ((GraphWithMetadata)dlm.getSelectedValue());
+			String selectedGraphID = selectedGraph.getID();
 			Graph g = modules.getGraph(selectedGraphID);
 			printGraphInfo(g);
 			view.setGraph(g,"id");
+			initModuleInfoBox(selectedGraph);
 		}
 	}
 

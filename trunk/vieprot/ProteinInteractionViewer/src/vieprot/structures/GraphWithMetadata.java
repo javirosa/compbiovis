@@ -14,6 +14,7 @@ public class GraphWithMetadata {
 	private Graph g;
 	private int numberOfNodes;
 	private int numberAlignedEdges;
+	private float averageAlignedEdges;
 	private int module0Nodes;
 	private int module1Nodes;
 	
@@ -47,14 +48,19 @@ public class GraphWithMetadata {
 			if((boolean)((String)t.get("group")).equals(Constants.ALIGNED_EDGES))
 				numberAlignedEdges++;
 		}
+		
+		averageAlignedEdges = (float)(numberAlignedEdges*2)/(float)numberOfNodes;
 	}
 	
 	public int getNumberOfNodes() { return numberOfNodes; }
+	public int getNumberOfM0Nodes() { return module0Nodes; }
+	public int getNumberOfM1Nodes() { return module1Nodes; }
 	public int getNumberOfAlignedEdges() { return numberAlignedEdges; }
+	public float getAverageAlignedEdgeDegree() { return averageAlignedEdges; }
 	
 	public String getID() { return (String)g.getClientProperty("id"); }
 	
 	public String toString() {
-		return String.format("%s\t|\tm0: %d\t|\tm1: %d",g.getClientProperty("id"), module0Nodes, module1Nodes);
+		return String.format("%s\t|\tm0: %d\t|\tm1: %d|\tavg: %.3f",g.getClientProperty("id"), module0Nodes, module1Nodes, averageAlignedEdges);
 	}
 }
