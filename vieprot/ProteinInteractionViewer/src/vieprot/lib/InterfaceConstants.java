@@ -7,6 +7,7 @@ public class InterfaceConstants {
 	public static String SORT_OPTIONS_ID = "id";
 	public static String SORT_OPTIONS_NUM_NODES = "# proteins";
 	public static String SORT_OPTIONS_ALIGNED_EDGES = "# aligned edges";
+	public static String SORT_OPTIONS_ALIGNED_DEGREE = "aligned degree";
 	
 	// Colors
 	public static int MODULE_0_FILL_COLOR = ColorLib.rgb(255, 162, 162);
