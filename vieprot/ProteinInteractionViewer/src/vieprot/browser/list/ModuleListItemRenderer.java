@@ -13,16 +13,20 @@ import sun.swing.DefaultLookup;
 
 public class ModuleListItemRenderer extends JLabel implements ListCellRenderer {
 
-	   /**
-	    * An empty <code>Border</code>. This field might not be used. To change the
-	    * <code>Border</code> used by this renderer override the 
-	    * <code>getListCellRendererComponent</code> method and set the border
-	    * of the returned component directly.
-	    */
-	    private static final Border SAFE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
-	    private static final Border DEFAULT_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
-	    protected static Border noFocusBorder = DEFAULT_NO_FOCUS_BORDER;
+   /**
+    * An empty <code>Border</code>. This field might not be used. To change the
+    * <code>Border</code> used by this renderer override the 
+    * <code>getListCellRendererComponent</code> method and set the border
+    * of the returned component directly.
+    */
+    private static final Border SAFE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
+    private static final Border DEFAULT_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
+    protected static Border noFocusBorder = DEFAULT_NO_FOCUS_BORDER;
 	
+    public ModuleListItemRenderer() {
+    	this.setOpaque(true);
+    }
+    
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
