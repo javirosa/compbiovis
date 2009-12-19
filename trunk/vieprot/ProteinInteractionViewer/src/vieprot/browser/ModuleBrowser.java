@@ -47,6 +47,8 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
     
 	private SortableModuleListModel graphIDs = new SortableModuleListModel();
 	
+	private boolean justSorted = false;
+	
 	public ModuleBrowser(GraphCollection gc, ModuleViewer v) {
 		modules = gc;
 		view = v;
@@ -72,7 +74,7 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
         }
         */
         modulesList = new JList(graphIDs);
-        modulesList.setSelectionBackground(new Color(0,0,255));
+        //modulesList.setSelectionBackground(new Color(172,248,255));
         modulesList.setSelectionForeground(new Color(0,0,0));
         ModuleListItemRenderer renderer= new ModuleListItemRenderer();
         modulesList.setCellRenderer(renderer);
@@ -133,7 +135,7 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if(!e.getValueIsAdjusting()) {
+		if(!e.getValueIsAdjusting() && !justSorted) {
 			JList dlm = (JList)e.getSource();
 			GraphWithMetadata selectedGraph = ((GraphWithMetadata)dlm.getSelectedValue());
 			String selectedGraphID = selectedGraph.getID();
@@ -142,12 +144,16 @@ public class ModuleBrowser extends JPanel implements ListSelectionListener, Acti
 			view.setGraph(g,"id");
 			initModuleInfoBox(selectedGraph);
 		}
+		justSorted = false;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+        justSorted = true;
         JComboBox cb = (JComboBox)e.getSource();
+        Object selectedObject = modulesList.getSelectedValue();
         String sortOption = (String)cb.getSelectedItem();
         graphIDs.sort(sortOption);
+        modulesList.setSelectedValue(selectedObject, true);
 	}
 }
